@@ -6,15 +6,14 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/01/13 19:11:44 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/01/13 19:20:55 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-# include <stdio.h>
 
 int	main (void)
 {
-	printf("compilouuu!!\n");
+	ft_printf("compilouuu!!\n");
 	return (0);
 }
