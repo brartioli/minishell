@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/01/17 14:52:11 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/01/17 16:35:50 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,25 @@
 
 int	main (int argc, char **argv, char **envp)
 {
-	// t_env	*env;
+	t_env	*env_list;
 	t_token *token_list;
 	char	*cmd_line;
 	
 	(void)argc;
 	(void)argv;
-	(void)envp;
 	token_list = NULL;
-	// env = init_env(envp);
+	env_list = init_env(envp);
 	// CRIAR FUNCAO INIT_ENV
 	// splitar o env
 	// pegar o resultado do split e percorrer
 	// armazenar na lista de envs
 	// if (!env)
 	// 	ft_printf("Error");
-	
+	while(env_list)
+	{
+		ft_printf("%s\n", env_list->value);
+		env_list = env_list->next;
+	}
 	while (1)
 	{
 		cmd_line = readline("minishell> ");

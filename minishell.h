@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/01/17 14:45:11 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/01/17 16:14:15 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,8 @@ t_token	*create_token(char *value, char *type);
 void	add_token_back(t_token **token_list, t_token *new_token);
 void	print_token_list(t_token *token_list);
 
-
+//env
+t_env    *init_env(char **envp);
+void    add_env_back(t_env **env_list, t_env *new_env);
+t_env    *create_env_node(char *name, char *value);
 #endif
