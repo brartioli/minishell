@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maluojuara <maluojuara@student.42.fr>      +#+  +:+       +#+        */
+/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/01/17 13:40:10 by maluojuara       ###   ########.fr       */
+/*   Updated: 2026/01/17 13:47:55 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <signal.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <readline/readline.h>
 # include "libft/libft.h"
 
 // Define token types
