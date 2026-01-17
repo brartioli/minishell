@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/01/17 13:47:55 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/01/17 14:45:11 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@
 # include "libft/libft.h"
 
 // Define token types
-# define TYPE_CMD "CMD"
-# define TYPE_ARG "ARG"
+# define TYPE_WORD "WORD"
 # define TYPE_PIPE "PIPE"
 
 
@@ -43,7 +42,13 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
-// Functions
+// FUNCTIONS
+
+// Tokens
+void	init_token_list(t_token **token_list, char *cmd_line);
+t_token	*create_token(char *value, char *type);
+void	add_token_back(t_token **token_list, t_token *new_token);
+void	print_token_list(t_token *token_list);
 
 
 #endif

@@ -6,7 +6,7 @@
 #    By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 18:14:51 by bfernan2          #+#    #+#              #
-#    Updated: 2026/01/17 13:50:38 by malcosta         ###   ########.fr        #
+#    Updated: 2026/01/17 14:43:04 by malcosta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ MAKEFLAGS += --silent
 
 NAME = minishell
 
-SRC = main.c
+SRC = main.c tokenize/token_utils.c tokenize/tokenize.c
 
 LIBFT_DIR = ./libft/
 LIBFT = $(LIBFT_DIR)libft.a
