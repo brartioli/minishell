@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+         #
+#    By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 18:14:51 by bfernan2          #+#    #+#              #
-#    Updated: 2026/01/17 14:43:04 by malcosta         ###   ########.fr        #
+#    Updated: 2026/01/17 16:17:40 by bfernan2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ MAKEFLAGS += --silent
 
 NAME = minishell
 
-SRC = main.c tokenize/token_utils.c tokenize/tokenize.c
+SRC = main.c tokenize/token_utils.c tokenize/tokenize.c env/env.c env/env_utils.c 
 
 LIBFT_DIR = ./libft/
 LIBFT = $(LIBFT_DIR)libft.a
@@ -22,7 +22,7 @@ LIBFT = $(LIBFT_DIR)libft.a
 OBJ = $(SRC:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I.
 READLINE = -lreadline
 
 all: $(NAME)
