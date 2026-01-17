@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/01/17 13:51:28 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/01/17 14:52:11 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,18 @@
 int	main (int argc, char **argv, char **envp)
 {
 	// t_env	*env;
-	// t_token *token;
+	t_token *token_list;
 	char	*cmd_line;
 	
 	(void)argc;
 	(void)argv;
 	(void)envp;
+	token_list = NULL;
 	// env = init_env(envp);
+	// CRIAR FUNCAO INIT_ENV
+	// splitar o env
+	// pegar o resultado do split e percorrer
+	// armazenar na lista de envs
 	// if (!env)
 	// 	ft_printf("Error");
 	
@@ -32,11 +37,8 @@ int	main (int argc, char **argv, char **envp)
 			break ;
 		else
 		{
-			// CRIAR UMA FUNÇÃO INIT_TOKEN OU TOKENIZE QUE VAI TER OS SEGUINTES PASSOS:
-			// splitar a linha de comando
-			// pegar o resultado do split e percorrer
-			// armazenar na lisra de tookens
-			ft_printf("tokenizar\n");
+			init_token_list(&token_list, cmd_line);
+			//print_token_list(token_list);
 		}
 	}
 	return (0);
