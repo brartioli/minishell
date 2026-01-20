@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 14:18:34 by malcosta          #+#    #+#             */
-/*   Updated: 2026/01/17 14:44:35 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/01/20 20:06:42 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,19 @@ void	print_token_list(t_token *token_list)
 		ft_printf("value: [%s]\n", token_list->value);
 		ft_printf("type:  [%s]\n\n", token_list->type);
 		token_list = token_list->next;
+	}
+}
+
+void	free_token_list(t_token *token_list)
+{
+	t_token	*tmp;
+
+	while (token_list)
+	{
+		tmp = token_list;
+		token_list = token_list->next;
+		free(tmp->value);
+		free(tmp->type);
+		free(tmp);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:13:49 by malcosta          #+#    #+#             */
-/*   Updated: 2026/01/08 20:22:32 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/01/20 19:37:40 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 /*ADDITIONAL FUNCTIONS*/
 int		ft_str_equal(char *str1, char *str2);
+void	ft_free_split(char **split);
 
 #endif

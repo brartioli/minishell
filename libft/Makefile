@@ -6,7 +6,7 @@
 #    By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/20 02:38:04 by maluojuara        #+#    #+#              #
-#    Updated: 2026/01/08 20:22:53 by malcosta         ###   ########.fr        #
+#    Updated: 2026/01/20 19:37:55 by malcosta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ ft_strlcat.c ft_strncmp.c ft_strnstr.c\
 ft_substr.c ft_strjoin.c ft_itoa.c\
 ft_strtrim.c ft_split.c ft_strmapi.c\
 ft_putnbr_fd.c ft_striteri.c ft_atol.c\
-ft_str_equal.c ft_atof.c\
+ft_str_equal.c ft_atof.c ft_free_split.c\
 
 SRCS_B = ft_lstnew_bonus.c ft_lstadd_front_bonus.c\
 ft_lstsize_bonus.c ft_lstlast_bonus.c\
