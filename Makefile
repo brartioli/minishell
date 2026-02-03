@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+         #
+#    By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 18:14:51 by bfernan2          #+#    #+#              #
-#    Updated: 2026/02/03 17:40:23 by bfernan2         ###   ########.fr        #
+#    Updated: 2026/02/03 20:54:54 by malcosta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,9 @@ MAKEFLAGS += --silent
 
 NAME = minishell
 
-SRC = main.c tokenize/token_utils.c tokenize/tokenize.c env/env.c env/env_utils.c builtin_cmd/builtins.c builtin_cmd/execute_builtins.c 
+SRC = main.c tokenize/token_utils.c tokenize/tokenize.c env/env.c \
+env/env_utils.c path_cmds/ft_execute_path.c \
+
 
 LIBFT_DIR = ./libft/
 LIBFT = $(LIBFT_DIR)libft.a

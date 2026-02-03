@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/03 18:26:30 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/02/03 20:53:58 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ int	main (int argc, char **argv, char **envp)
 	
 	(void)argc;
 	(void)argv;
-	token_list = NULL;
 	env_list = NULL;
 	env_list = init_env(envp);
 	while (1)
 	{
+		token_list = NULL;
 		cmd_line = readline("minishell> ");
 		if (ft_str_equal(cmd_line, "exit") == 1)
 			break ;
@@ -93,15 +93,12 @@ int	main (int argc, char **argv, char **envp)
 			ft_printf("%s\n", token_list->value);
 			if (ft_is_builtin(token_list->value))
 			{
-				ft_execute_bultin(*token_list, **env_list);
+				ft_printf("builtin\n");
+				// ft_execute_bultin(*token_list, **env_list);
 			}
 			else
 			{
-				ft_printf("executar path\n");
-			// ft_executar_bultin(cmd, args);
-			//olhar pro primeiro elemento do token list e decidir se eh um bultin ou se eh do path
-			// se for do path: executar a funcao path
-			// se for bultin: executar a funcao bultin
+				ft_execute_path(token_list, env_list);
 			}
 		}
 		free_token_list(token_list);
