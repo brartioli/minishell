@@ -6,13 +6,11 @@
 /*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/03 18:26:30 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/02/03 19:15:33 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
 
 // static int	find_cmd(char *cmd, char *path)
 // {
@@ -93,7 +91,7 @@ int	main (int argc, char **argv, char **envp)
 			ft_printf("%s\n", token_list->value);
 			if (ft_is_builtin(token_list->value))
 			{
-				ft_execute_bultin(*token_list, **env_list);
+				ft_execute_bultin(token_list, &env_list);
 			}
 			else
 			{
