@@ -3,17 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:26:57 by malcosta          #+#    #+#             */
-/*   Updated: 2026/01/20 18:29:02 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/03 17:57:46 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-ft_executar_bultin(cmd, args)
+#include "minishell.h"
+
+int	ft_execute_bultin(t_token *token_list, t_env **env_list)
 {
-	if (cmd == "echo")
-		ft_execute_echo();
-	else if (cmd = "pwd")
-		ft_execute_pwd();
+	char	*cmd;
+	
+	if (!token_list || !token_list->value)
+		return (1);
+
+	cmd = token_list->value;
+	if (ft_str_equal(cmd, "echo"))
+		return (ft_execute_echo(token_list));
+	else if (ft_str_equal(cmd, "pwd"))
+		return (ft_execute_pwd());
+	else if (ft_str_equal(cmd, "cd"))
+		return (ft_execute_cd(token_list, env_list));
+	else if (ft_str_equal(cmd, "env"))
+		return (ft_execute_env(*env_list));
+	else if (ft_str_equal(cmd, "export"))
+		return (ft_execute_export(token_list, env_list));
+	else if (ft_str_equal(cmd, "unset"))
+		return (ft_execute_unset(token_list, env_list));
+	else if (ft_str_equal(cmd, "exit"))
+		return (ft_execute_exit(token_list));
+	return (1);
 }
