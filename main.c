@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/01/20 20:07:31 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/03 18:26:30 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,7 @@ int	main (int argc, char **argv, char **envp)
 			ft_printf("%s\n", token_list->value);
 			if (ft_is_builtin(token_list->value))
 			{
-				ft_printf("executar builtin\n");
-				// ft_executar_path();
+				ft_execute_bultin(*token_list, **env_list);
 			}
 			else
 			{
