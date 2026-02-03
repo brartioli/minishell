@@ -6,7 +6,7 @@
 /*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/03 18:58:24 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/02/03 20:36:52 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,5 @@ t_env    *create_env_node(char *name, char *value);
 //builtin
 int	ft_execute_bultin(t_token *token_list, t_env **env_list);
 int ft_execute_pwd(void);
-
+int ft_execute_env(t_env *env_list);
 #endif
