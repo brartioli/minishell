@@ -88,15 +88,14 @@ int	main (int argc, char **argv, char **envp)
 		else
 		{
 			init_token_list(&token_list, cmd_line);
-			ft_printf("%s\n", token_list->value);
 			if (ft_is_builtin(token_list->value))
 			{
-				ft_printf("builtin\n");
-				// ft_execute_bultin(*token_list, **env_list);
+				ft_execute_bultin(token_list, &env_list);
 			}
 			else
 			{
-				ft_execute_path(token_list, env_list);
+				//ft_execute_path(token_list, env_list);
+				ft_printf("Path\n");
 			}
 		}
 		free_token_list(token_list);

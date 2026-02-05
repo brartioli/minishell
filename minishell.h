@@ -59,7 +59,7 @@ t_env    *create_env_node(char *name, char *value);
 //builtin
 int	ft_execute_bultin(t_token *token_list, t_env **env_list);
 int ft_execute_pwd(void);
-int ft_execute_env(t_env *env_list);
+int ft_execute_env(t_env **env_list);
 //path
 void	ft_execute_path(t_token *token_list, t_env *env_list);
 char	*get_full_path(char *cmd, t_env *env_list);

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+/*#include "minishell.h"
 
 void	ft_execute_path(t_token *token_list, t_env *env_list)
 {
@@ -93,7 +93,7 @@ char *get_path_from_env(t_env *env_list)
 		env_list = env_list->next;
 	}
 	return (NULL);
-}
+}*/
 
 
 // char	**build_args(t_token *token)
@@ -190,4 +190,4 @@ char *get_path_from_env(t_env *env_list)
 	// }
 	// if (execve(path, cmds, env) == -1)
 	// 	cleanup_and_exit(cmds, path, path_env, 1);
-}
+//}

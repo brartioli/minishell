@@ -27,12 +27,18 @@ int ft_execute_pwd(void)
     return (0);
 }
 
-int ft_execute_env(t_env *env_list)
+int ft_execute_env(t_env **env_list)
 {
-    while (env_list)
+    t_env   *tmp;
+
+	if (!env_list || !*env_list)
+        return (0);
+    tmp = *env_list;
+    while (tmp)
     {
-        ft_printf("%s=5s\n", env_list->name, env_list->value);
-        env_list = env_list->next;
+        if (tmp->value)
+            ft_printf("%s=%s\n", tmp->name, tmp->value);
+        tmp = tmp->next;
     }
     return (0);
 }
