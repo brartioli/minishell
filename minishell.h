@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/01/20 20:07:03 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/03 20:52:00 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,11 @@ void	free_token_list(t_token *token_list);
 t_env    *init_env(char **envp);
 void    add_env_back(t_env **env_list, t_env *new_env);
 t_env    *create_env_node(char *name, char *value);
+
+//path
+void	ft_execute_path(t_token *token_list, t_env *env_list);
+char	*get_full_path(char *cmd, t_env *env_list);
+char *get_path_from_env(t_env *env_list);
+
+
 #endif
