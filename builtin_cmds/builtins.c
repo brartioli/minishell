@@ -28,7 +28,7 @@ int	ft_execute_bultin(t_token *token_list, t_env **env_list)
 	// else if (ft_str_equal(cmd, "cd"))
 	// 	return (ft_execute_cd(token_list, env_list));
 	else if (ft_str_equal(cmd, "env"))
-		return (ft_execute_env(*env_list));
+		return (ft_execute_env(env_list));
 	// else if (ft_str_equal(cmd, "export"))
 	// 	return (ft_execute_export(token_list, env_list));
 	// else if (ft_str_equal(cmd, "unset"))
