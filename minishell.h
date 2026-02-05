@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <readline/readline.h>
 # include "libft/libft.h"
+# include <sys/wait.h>
 
 // Define token types
 # define TYPE_WORD "WORD"
@@ -57,9 +58,14 @@ void    add_env_back(t_env **env_list, t_env *new_env);
 t_env    *create_env_node(char *name, char *value);
 
 //path
-void	ft_execute_path(t_token *token_list, t_env *env_list);
-char	*get_full_path(char *cmd, t_env *env_list);
-char *get_path_from_env(t_env *env_list);
+void    ft_execute_path(t_token *token_list, char **envp);
+char *get_path_from_env(char **env);
+char    *get_full_path(char *cmd, char **envp);
+int count_args(t_token *start);
+char **allocate_args(int count);
+int fill_args(char **args, t_token *start);
+char **build_args(t_token *start);
+void free_args(char **args);
 
 
 #endif

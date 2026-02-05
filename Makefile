@@ -15,7 +15,7 @@ MAKEFLAGS += --silent
 NAME = minishell
 
 SRC = main.c tokenize/token_utils.c tokenize/tokenize.c env/env.c \
-env/env_utils.c path_cmds/ft_execute_path.c \
+env/env_utils.c path_cmds/ft_execute_path.c path_cmds/build_args.c\
 
 
 LIBFT_DIR = ./libft/
