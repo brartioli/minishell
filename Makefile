@@ -16,7 +16,7 @@ NAME = minishell
 
 SRC = main.c tokenize/token_utils.c tokenize/tokenize.c \
 env/env.c env/env_utils.c \
-path_cmds/ft_execute_path.c \
+path_cmds/ft_execute_path.c path_cmds/build_args.c\
 builtin_cmds/builtins.c builtin_cmds/execute_builtins.c \
 
 
