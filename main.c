@@ -71,14 +71,14 @@ static int	ft_is_builtin(char *cmd)
 
 int	main (int argc, char **argv, char **envp)
 {
-	t_env	*env_list;
+	// t_env	*env_list;
 	t_token *token_list;
 	char	*cmd_line;
 	
 	(void)argc;
 	(void)argv;
-	env_list = NULL;
-	env_list = init_env(envp);
+	// env_list = NULL;
+	// env_list = init_env(envp);
 	while (1)
 	{
 		token_list = NULL;
@@ -96,7 +96,7 @@ int	main (int argc, char **argv, char **envp)
 			}
 			else
 			{
-				ft_execute_path(token_list, env_list);
+				ft_execute_path(token_list, envp);
 			}
 		}
 		free_token_list(token_list);
