@@ -6,13 +6,11 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/03 20:53:58 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/03 19:15:33 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
 
 // static int	find_cmd(char *cmd, char *path)
 // {
