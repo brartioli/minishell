@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 14:08:57 by malcosta          #+#    #+#             */
-/*   Updated: 2026/01/17 14:46:22 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/07 11:13:53 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	init_token_list(t_token **token_list, char *cmd_line)
 {
-	char **cmd_line_split;
+	char	**cmd_line_split;
 	t_token	*new_token;
-	int	i;
+	int		i;
 	char	*type;
 
 	cmd_line_split = ft_split(cmd_line, ' ');
