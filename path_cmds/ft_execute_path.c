@@ -6,33 +6,29 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 19:04:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/03 20:52:09 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/07 11:44:57 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char    *get_full_path(char *cmd, char **env)
+char	*get_full_path(char *cmd, char **env)
 {
-    char    *path;
-    char    **split_path;
-    char    *full_path;
-    char    *tmp;
-    int     i;
+	char	*path;
+	char	**split_path;
+	char	*full_path;
+	char	*tmp;
+	int		i;
 
-    if (!cmd)
-        return (NULL);
-    
-    // Se tem '/', testa o caminho direto
-    if (ft_strchr(cmd, '/'))
-    {
-        if (access(cmd, X_OK) == 0)
-            return (ft_strdup(cmd));
-        return (NULL);
-    }
-    
-    // Busca no PATH
-    path = get_path_from_env(env);  // ← Mudou aqui!
+	if (!cmd)
+		return (NULL);
+	if (ft_strchr(cmd, '/'))
+	{
+		if (access(cmd, X_OK) == 0)
+			return (ft_strdup(cmd));
+		return (NULL);
+	}
+	path = get_path_from_env(env);
     if (!path)
         return (NULL);
     
