@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/03 19:15:33 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/02/07 11:12:27 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ static int	ft_is_builtin(char *cmd)
 	return (0);
 }
 
-int	main (int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	t_env	*env_list;
-	t_token *token_list;
+	t_token	*token_list;
 	char	*cmd_line;
-	
+
 	(void)argc;
 	(void)argv;
 	env_list = NULL;
