@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/07 12:07:06 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/07 13:40:06 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	has_pipes(t_token *token_list)
 	ptr = token_list;
 	while (ptr)
 	{
-		if(ft_str_equal(ptr->value, "|"))
+		if(ft_str_equal(ptr->type, TYPE_PIPE))
 			return (1);
 		ptr = ptr->next;
 	}
@@ -45,11 +45,15 @@ static int	has_pipes(t_token *token_list)
 
 void	ft_execute_commad(t_token *token_list, t_env **env_list, char **envp)
 {
+	t_token	**cmds;
 	int	cmds_quant;
 	
 	if (has_pipes(token_list))
 	{
 		cmds_quant = count_commands(token_list);
+		cmds = split_commands_by_pipe(token_list, cmds_quant);
+		ft_execute_pipeline(cmds, cmds_quant, envp);
+		free(cmds);
 	}
 	else
 	{

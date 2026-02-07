@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/07 12:12:46 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/07 13:55:56 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	ft_execute_env(t_env **env_list);
 
 //Path
 void	ft_execute_path(t_token *token_list, char **envp);
-char 	get_path_from_env(char **env);
+char 	*get_path_from_env(char **env);
 char	*get_full_path(char *cmd, char **envp);
 int	count_args(t_token *start);
 char **allocate_args(int count);
@@ -77,5 +77,10 @@ void free_args(char **args);
 
 //Pipes
 int	count_commands(t_token *token_list);
+t_token	**split_commands_by_pipe(t_token *token_list, int cmds_quant);
+void	ft_execute_pipeline(t_token **cmds, int cmds_quant, char **envp);
+void	close_all_pipes(int **pipes, int cmds_quant);
+void	exec_pipes(t_token *cmd, char **envp);
+void	wait_all_children(pid_t *pids, int cmds_quant);
 
 #endif
