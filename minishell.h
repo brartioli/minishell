@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/07 12:12:46 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/07 14:00:11 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,13 @@ t_env	*create_env_node(char *name, char *value);
 int	ft_execute_bultin(t_token *token_list, t_env **env_list);
 int	ft_execute_pwd(void);
 int	ft_execute_env(t_env **env_list);
+int ft_execute_exit(t_token *token_list);
+//Utils Builtin
+int is_valid_number(char *str);
 
 //Path
 void	ft_execute_path(t_token *token_list, char **envp);
-char 	get_path_from_env(char **env);
+char 	*get_path_from_env(char **env);
 char	*get_full_path(char *cmd, char **envp);
 int	count_args(t_token *start);
 char **allocate_args(int count);

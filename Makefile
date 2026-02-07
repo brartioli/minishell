@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+         #
+#    By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 18:14:51 by bfernan2          #+#    #+#              #
-#    Updated: 2026/02/03 19:25:27 by bfernan2         ###   ########.fr        #
+#    Updated: 2026/02/07 14:00:49 by bfernan2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME = minishell
 SRC = main.c tokenize/token_utils.c tokenize/tokenize.c \
 env/env.c env/env_utils.c \
 path_cmds/ft_execute_path.c path_cmds/build_args.c\
-builtin_cmds/builtins.c builtin_cmds/execute_builtins.c \
+builtin_cmds/builtins.c builtin_cmds/execute_builtins.c builtin_cmds/builtins_utils.c\
 
 
 LIBFT_DIR = ./libft/
