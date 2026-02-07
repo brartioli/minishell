@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/03 20:36:52 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/02/07 12:12:46 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ typedef struct s_env
 
 // FUNCTIONS
 
+//Main
+void	ft_execute_commad(t_token *token_list, t_env **env_list, char **envp);
+
 // Tokens
 void	init_token_list(t_token **token_list, char *cmd_line);
 t_token	*create_token(char *value, char *type);
@@ -52,24 +55,27 @@ void	add_token_back(t_token **token_list, t_token *new_token);
 void	print_token_list(t_token *token_list);
 void	free_token_list(t_token *token_list);
 
-//env
-t_env    *init_env(char **envp);
-void    add_env_back(t_env **env_list, t_env *new_env);
-t_env    *create_env_node(char *name, char *value);
+//Env
+t_env	*init_env(char **envp);
+void	add_env_back(t_env **env_list, t_env *new_env);
+t_env	*create_env_node(char *name, char *value);
 
-//builtin
+//Builtin
 int	ft_execute_bultin(t_token *token_list, t_env **env_list);
-int ft_execute_pwd(void);
-int ft_execute_env(t_env **env_list);
-//path
-void    ft_execute_path(t_token *token_list, char **envp);
-char *get_path_from_env(char **env);
-char    *get_full_path(char *cmd, char **envp);
-int count_args(t_token *start);
+int	ft_execute_pwd(void);
+int	ft_execute_env(t_env **env_list);
+
+//Path
+void	ft_execute_path(t_token *token_list, char **envp);
+char 	get_path_from_env(char **env);
+char	*get_full_path(char *cmd, char **envp);
+int	count_args(t_token *start);
 char **allocate_args(int count);
 int fill_args(char **args, t_token *start);
 char **build_args(t_token *start);
 void free_args(char **args);
 
+//Pipes
+int	count_commands(t_token *token_list);
 
 #endif
