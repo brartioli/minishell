@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 14:08:57 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/07 11:13:53 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/02/11 19:57:25 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static char	*get_token_type(char *token)
+{
+	if (ft_str_equal(token, "|"))
+		return (TYPE_PIPE);
+	if (ft_str_equal(token, "<"))
+		return (TYPE_REDIR_IN);
+	if (ft_str_equal(token, ">"))
+		return (TYPE_REDIR_OUT);
+	if (ft_str_equal(token, ">>"))
+		return (TYPE_REDIR_APPEND);
+	if (ft_str_equal(token, "<<"))
+		return (TYPE_HEREDOC);
+	return (TYPE_WORD);
+}
 
 void	init_token_list(t_token **token_list, char *cmd_line)
 {
@@ -23,11 +38,10 @@ void	init_token_list(t_token **token_list, char *cmd_line)
 	i = 0;
 	while (cmd_line_split[i])
 	{
-		type = TYPE_WORD;
-		if (ft_str_equal(cmd_line_split[i], "|"))
-			type = TYPE_PIPE;
+		type = get_token_type(cmd_line_split[i]);
 		new_token = create_token(cmd_line_split[i], type);
 		add_token_back(token_list, new_token);
 		i++;
 	}
+	ft_free_split(cmd_line_split);
 }
