@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 12:03:31 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/11 19:02:51 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/11 19:38:11 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_execute_pipeline(t_token **cmds, int cmds_quant, char **envp)
 		return ;
 	pids = malloc(sizeof(pid_t) * cmds_quant);
 	if (!pids)
-		return;
+		return ;
 	i = 0;
 	while (i < cmds_quant)
 	{
