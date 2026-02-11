@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_execute_path.c                                  :+:      :+:    :+:   */
+/*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/03 19:04:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/07 11:44:57 by malcosta         ###   ########.fr       */
+/*   Created: 2026/02/11 18:41:43 by malcosta          #+#    #+#             */
+/*   Updated: 2026/02/11 18:43:59 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,47 +69,4 @@ char *get_path_from_env(char **env)
         i++;
     }
     return (NULL);
-}
-
-
-void    ft_execute_path(t_token *token_list, char **envp)
-{
-    char    *full_path;
-    char    **args;
-    pid_t   pid;
-
-    if (!token_list || !token_list->value)
-        return ;
-    
-    args = build_args(token_list);
-    if (!args)
-        return ;
-    
-    full_path = get_full_path(args[0], envp);  // ← Passou envp
-    if (!full_path)
-    {
-        ft_printf("%s: command not found\n", args[0]);
-        free_args(args);
-        return ;
-    }
-    
-    pid = fork();
-    if (pid < 0)
-    {
-        perror("fork");
-        free(full_path);
-        free_args(args);
-        return ;
-    }
-    else if (pid == 0)
-    {
-        execve(full_path, args, envp);  // ← Passou envp
-        perror("execve");
-        exit(EXIT_FAILURE);
-    }
-    else
-        waitpid(pid, NULL, 0);
-    
-    free(full_path);
-    free_args(args);
 }

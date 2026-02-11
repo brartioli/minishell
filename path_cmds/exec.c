@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipes.c                                            :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/07 12:03:31 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/07 12:05:16 by malcosta         ###   ########.fr       */
+/*   Created: 2026/02/11 18:48:06 by malcosta          #+#    #+#             */
+/*   Updated: 2026/02/11 18:51:01 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	count_commands(t_token *token_list)
+void	ft_exec(t_token *cmd, char **envp)
 {
-	int	count;
+	char	**args;
+	char	*path;
 
-	count = 1;
-	while (token_list)
+	if (!cmd || !cmd->value)
+		exit (1);
+	args = build_args(cmd);
+	if (!args)
+		exit (1);
+	path = get_full_path(args[0], envp);
+	if (!path)
 	{
-		if (ft_str_equal(token_list->value, "|"))
-			count++;
-		token_list = token_list->next;
+		ft_printf("%s: command not found\n", args[0]);
+		free_args(args);
+		exit (127);
 	}
-	return (count);
+	execve(path, args, envp);
+	perror("execve");
+	free(path);
+	free_args(args);
+	exit(1);
 }
