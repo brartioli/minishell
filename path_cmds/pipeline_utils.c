@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 18:54:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/11 18:58:31 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/11 19:33:29 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	**create_pipes(int cmds_quant)
 	i = 0;
 	while (i < cmds_quant - 1)
 	{
-		pipes[i] = malloc(sizeof(int) * 2); 
+		pipes[i] = malloc(sizeof(int) * 2);
 		if (pipe(pipes[i]) == -1)
 		{
 			perror("pipe");
