@@ -6,7 +6,7 @@
 /*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/11 19:59:24 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/02/11 20:27:23 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,15 @@ static int	has_pipes(t_token *token_list)
 
 void	ft_execute_commad(t_mini *mini, char **envp)
 {
-	int	cmds_quant;
+	int			cmds_quant;
+	t_token**	cmds;
 	
 	if (has_pipes(mini->token_list))
 	{
-		cmds_quant = count_commands(token_list);
-    cmds = split_commands_by_pipe(token_list, cmds_quant);
-    ft_execute_pipeline(cmds, cmds_quant, envp);
-    free(cmds);
-    
+		cmds_quant = count_commands(mini->token_list);
+    	cmds = split_commands_by_pipe(mini->token_list, cmds_quant);
+    	ft_execute_pipeline(cmds, cmds_quant, envp);
+    	free(cmds);
 	}
 	else
 	{
