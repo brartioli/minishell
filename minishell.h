@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/11 19:06:14 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/11 19:48:16 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@
 // Define token types
 # define TYPE_WORD "WORD"
 # define TYPE_PIPE "PIPE"
-
+# define TYPE_REDIR_IN "REDIR_IN"
+# define TYPE_REDIR_OUT "REDIR_OUT"
+# define TYPE_REDIR_APPEND "APPEND"
+# define TYPE_HEREDOC "HEREDOC"
 
 // Structs
 typedef struct s_token
@@ -34,7 +37,6 @@ typedef struct s_token
 	struct s_token	*next;
 	struct s_token	*prev;
 }		t_token;
-
 
 typedef struct s_env
 {
