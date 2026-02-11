@@ -36,7 +36,7 @@ static int	has_pipes(t_token *token_list)
 	ptr = token_list;
 	while (ptr)
 	{
-		if(ft_str_equal(ptr->value, "|"))
+		if (ft_str_equal(ptr->type, TYPE_PIPE))
 			return (1);
 		ptr = ptr->next;
 	}
@@ -45,19 +45,22 @@ static int	has_pipes(t_token *token_list)
 
 void	ft_execute_commad(t_mini *mini, char **envp)
 {
-	// int	cmds_quant;
+	int	cmds_quant;
 	
 	if (has_pipes(mini->token_list))
 	{
-		// cmds_quant = count_commands(mini->token_list);
-		ft_printf("Pepes nao implementados\n");
+		cmds_quant = count_commands(token_list);
+    cmds = split_commands_by_pipe(token_list, cmds_quant);
+    ft_execute_pipeline(cmds, cmds_quant, envp);
+    free(cmds);
+    
 	}
 	else
 	{
 		if (ft_is_builtin(mini->token_list->value))
 			mini->exit_status = ft_execute_bultin(mini);
 		else
-			ft_execute_path(mini->token_list, envp);
+			ft_execute_simple_command(mini->token_list, envp);
 	}
 }
 

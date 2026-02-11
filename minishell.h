@@ -24,22 +24,24 @@
 // Define token types
 # define TYPE_WORD "WORD"
 # define TYPE_PIPE "PIPE"
-
+# define TYPE_REDIR_IN "REDIR_IN"
+# define TYPE_REDIR_OUT "REDIR_OUT"
+# define TYPE_REDIR_APPEND "APPEND"
+# define TYPE_HEREDOC "HEREDOC"
 
 // Structs
 typedef struct s_token
 {
-	char	*value;
-	char	*type;
+	char			*value;
+	char			*type;
 	struct s_token	*next;
 	struct s_token	*prev;
 }		t_token;
 
-
 typedef struct s_env
 {
-	char	*name;
-	char	*value;
+	char			*name;
+	char			*value;
 	struct s_env	*next;
 }	t_env;
 
@@ -72,20 +74,31 @@ int	ft_execute_bultin(t_mini *mini);
 int	ft_execute_pwd(void);
 int ft_execute_env(t_mini *mini);
 int ft_execute_exit(t_mini	*mini);
+
 //Utils Builtin
 int is_valid_number(char *str);
 
-//Path
-void	ft_execute_path(t_token *token_list, char **envp);
-char 	*get_path_from_env(char **env);
+//Path execution
+void	ft_exec(t_token *cmd, char **envp);
+void	ft_execute_simple_command(t_token *token_list, char **envp);
+char	*get_path_from_env(char **env);
 char	*get_full_path(char *cmd, char **envp);
-int	count_args(t_token *start);
-char **allocate_args(int count);
-int fill_args(char **args, t_token *start);
-char **build_args(t_token *start);
-void free_args(char **args);
 
-//Pipes
-int	count_commands(t_token *token_list);
+//Args handling
+int		count_args(t_token *start);
+char	**allocate_args(int count);
+int		fill_args(char **args, t_token *start);
+char	**build_args(t_token *start);
+void	free_args(char **args);
+
+//Pipeline execution
+void	ft_execute_pipeline(t_token **cmds, int cmds_quant, char **envp);
+void	close_all_pipes(int **pipes, int cmds_quant);
+void	wait_all_children(pid_t *pids, int cmds_quant);
+
+//Pipeline utils
+int		count_commands(t_token *token_list);
+t_token	**split_commands_by_pipe(t_token *token_list, int cmds_quant);
+int		**create_pipes(int cmds_quant);
 
 #endif
