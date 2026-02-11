@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/11 19:48:16 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/11 19:52:17 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,17 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
+typedef struct s_mini
+{
+	t_env	*env_list;
+	t_token	*token_list;
+	int		exit_status;
+}	t_mini;
+
 // FUNCTIONS
 
 //Main
-void	ft_execute_commad(t_token *token_list, t_env **env_list, char **envp);
+void	ft_execute_commad(t_mini *mini, char **envp);
 
 // Tokens
 void	init_token_list(t_token **token_list, char *cmd_line);
@@ -63,9 +70,13 @@ void	add_env_back(t_env **env_list, t_env *new_env);
 t_env	*create_env_node(char *name, char *value);
 
 //Builtin
-int		ft_execute_bultin(t_token *token_list, t_env **env_list);
-int		ft_execute_pwd(void);
-int		ft_execute_env(t_env **env_list);
+int	ft_execute_bultin(t_mini *mini);
+int	ft_execute_pwd(void);
+int ft_execute_env(t_mini *mini);
+int ft_execute_exit(t_mini	*mini);
+
+//Utils Builtin
+int is_valid_number(char *str);
 
 //Path execution
 void	ft_exec(t_token *cmd, char **envp);
