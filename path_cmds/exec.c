@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 18:48:06 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/11 18:51:01 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/12 18:20:24 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	ft_exec(t_token *cmd, char **envp)
 
 	if (!cmd || !cmd->value)
 		exit (1);
+	if (handle_redirects(cmd) == -1)
+		exit(1);
 	args = build_args(cmd);
 	if (!args)
 		exit (1);

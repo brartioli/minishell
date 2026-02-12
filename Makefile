@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+         #
+#    By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 18:14:51 by bfernan2          #+#    #+#              #
-#    Updated: 2026/02/11 20:30:25 by bfernan2         ###   ########.fr        #
+#    Updated: 2026/02/12 18:21:18 by malcosta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,12 @@ path_cmds/execute_pipeline.c \
 path_cmds/pipeline_utils.c \
 path_cmds/build_args.c \
 path_cmds/get_path.c \
+path_cmds/redirects.c\
 builtin_cmds/builtins.c \
 builtin_cmds/execute_pwd.c \
 builtin_cmds/execute_env.c \
 builtin_cmds/exit_utils.c \
-builtin_cmds/execute_exit.c
+builtin_cmds/execute_exit.c\
 
 
 LIBFT_DIR = ./libft/

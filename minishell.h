@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/11 19:52:17 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/02/12 18:18:40 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	ft_exec(t_token *cmd, char **envp);
 void	ft_execute_simple_command(t_token *token_list, char **envp);
 char	*get_path_from_env(char **env);
 char	*get_full_path(char *cmd, char **envp);
+int		handle_redirects(t_token *token_list);
 
 //Args handling
 int		count_args(t_token *start);
