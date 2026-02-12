@@ -17,9 +17,15 @@ int is_valid_number(char *str)
     int i;
 
     i = 0;
-    while (str && str[i])
+    if (!str || !str[0])
+        return (0);
+    if (str[i] == '+' || str[i] == '-')
+        i++;
+    if (!str[i])
+        return (0);
+    while (str[i])
     {
-        if (!(ft_isdigit (str[i]) || str[i] == '+'))
+        if (!(ft_isdigit (str[i])))
             return (0);
         i++;
     }
