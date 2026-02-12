@@ -16,6 +16,11 @@ int ft_execute_env(t_mini *mini)
 {
     t_env   *tmp;
 
+    if (mini->token_list->next)
+    {
+        ft_putendl_fd("env: too many arguments", 2);
+        return (1);
+    }
 	if (!mini || !mini->env_list)
         return (0);
     tmp = mini->env_list;

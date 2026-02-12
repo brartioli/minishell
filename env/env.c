@@ -24,12 +24,17 @@ t_env    *init_env(char **envp)
     while (envp[i])
     {
         name_value = ft_split(envp[i], '=');
+        if (!name_value)
+            return (NULL);
         new_node = create_env_node(name_value[0], name_value[1]);
         if (!new_node)
+        {
+            ft_free_split(name_value);
             return (NULL);
+        }
         add_env_back(&env_new_list, new_node);
-        i++;
         free(name_value);
+        i++;
     }
     return (env_new_list);
 }
