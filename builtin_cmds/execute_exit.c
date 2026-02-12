@@ -28,12 +28,13 @@ int ft_execute_exit(t_mini	*mini)
 	else if (count_args > 1)
 	{
 		ft_putendl_fd("minishell: exit: too many arguments", 2);
+		return (1);
 	}
 	arg = mini->token_list->next->value;
 	if (!is_valid_number(arg))
 	{
 		ft_printf("minishell: exit: %s: numeric argument required\n", arg);
-		exit(255);
+		exit(2);
 	}
 	exit(ft_atoi(arg) % 256);
 }
