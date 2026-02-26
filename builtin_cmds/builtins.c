@@ -6,7 +6,7 @@
 /*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 19:26:51 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/11 19:56:52 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/02/26 20:41:00 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	ft_execute_bultin(t_mini *mini)
 		return (1);
 
 	cmd = mini->token_list->value;
-	// if (ft_str_equal(cmd, "echo"))
-	// 	return (ft_execute_echo(token_list));
+	if (ft_str_equal(cmd, "echo"))
+		return (ft_execute_echo(mini));
 	if (ft_str_equal(cmd, "pwd"))
 		return (ft_execute_pwd());
 	// else if (ft_str_equal(cmd, "cd"))
