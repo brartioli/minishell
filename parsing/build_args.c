@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 11:14:51 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/07 11:28:10 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/02/25 10:12:11 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ int	count_args(t_token *start)
 	{
 		if (ft_str_equal(current->type, TYPE_WORD))
 			count++;
+		else if (ft_str_equal(current->type, TYPE_REDIR_IN) ||
+				ft_str_equal(current->type, TYPE_REDIR_OUT) ||
+				ft_str_equal(current->type, TYPE_REDIR_APPEND))
+		{
+			current = current->next;
+		}
 		current = current->next;
 	}
 	return (count);
@@ -56,24 +62,30 @@ int	fill_args(char **args, t_token *start)
 			}
 			i++;
 		}
+		else if (ft_str_equal(current->type, TYPE_REDIR_IN) ||
+				ft_str_equal(current->type, TYPE_REDIR_OUT) ||
+				ft_str_equal(current->type, TYPE_REDIR_APPEND))
+		{
+			current = current->next;
+		}
 		current = current->next;
 	}
 	args[i] = NULL;
 	return (0);
 }
 
-char	**build_args(t_token *start)
+char	**build_args(t_token *token_list)
 {
 	char	**args;
 	int		count;
 
-	count = count_args(start);
+	count = count_args(token_list);
 	if (count == 0)
 		return (NULL);
 	args = allocate_args(count);
 	if (!args)
 		return (NULL);
-	if (fill_args(args, start) == -1)
+	if (fill_args(args, token_list) == -1)
 	{
 		free(args);
 		return (NULL);
