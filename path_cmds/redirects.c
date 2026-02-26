@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 17:22:38 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/12 18:18:07 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/24 18:26:32 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,3 @@ int	handle_redirects(t_token *token_list)
 	}
 	return (0);
 }
-

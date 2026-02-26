@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/12 18:18:40 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/25 10:07:00 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,14 @@ typedef struct s_mini
 	t_token	*token_list;
 	int		exit_status;
 }	t_mini;
+
+typedef struct s_cmd
+{
+	char	**args;
+	char	*infile;
+	char	*outfile;
+	int		append;
+}	t_cmd;
 
 // FUNCTIONS
 
