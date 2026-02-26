@@ -6,7 +6,7 @@
 /*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 18:42:10 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/11 19:37:13 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/02/26 17:36:51 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ int ft_execute_env(t_mini *mini)
 
     if (mini->token_list->next)
     {
-        ft_putendl_fd("env: too many arguments", 2);
-        return (1);
+        ft_putstr_fd("env: '", 2);
+        ft_putstr_fd(mini->token_list->next->value, 2);
+        ft_putendl_fd("': No such file or directory", 2);
+        return (127);
     }
 	if (!mini || !mini->env_list)
         return (0);
