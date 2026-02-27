@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/26 20:22:37 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/27 15:04:39 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,45 +29,35 @@ static int	ft_is_builtin(char *cmd)
 	return (0);
 }
 
-static int	has_pipes(t_token *token_list)
-{
-	t_token	*ptr;
+// static int	has_pipes(t_token *token_list)
+// {
+// 	t_token	*ptr;
 
-	ptr = token_list;
-	while (ptr)
-	{
-		if (ft_str_equal(ptr->type, TYPE_PIPE))
-			return (1);
-		ptr = ptr->next;
-	}
-	return (0);
-}
+// 	ptr = token_list;
+// 	while (ptr)
+// 	{
+// 		if (ft_str_equal(ptr->type, TYPE_PIPE))
+// 			return (1);
+// 		ptr = ptr->next;
+// 	}
+// 	return (0);
+// }
 
-void	ft_execute_commad(t_mini *mini, char **envp)
+void	ft_execute_command(t_mini *mini, t_cmd *cmd, char **envp)
 {
-	int			cmds_quant;
-	t_token**	cmds;
-	
-	if (has_pipes(mini->token_list))
-	{
-		cmds_quant = count_commands(mini->token_list);
-    	cmds = split_commands_by_pipe(mini->token_list, cmds_quant);
-    	ft_execute_pipeline(cmds, cmds_quant, envp);
-    	free(cmds);
-	}
+	if (!cmd || !cmd->args || !cmd->args[0])
+		return ;
+	if (ft_is_builtin(cmd->args[0]))
+		mini->exit_status = ft_execute_builtin(mini, cmd);
 	else
-	{
-		if (ft_is_builtin(mini->token_list->value))
-			mini->exit_status = ft_execute_bultin(mini);
-		else
-			ft_execute_simple_command(mini->token_list, envp);
-	}
+		ft_execute_simple_command(cmd, envp);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_mini	mini;
 	char	*cmd_line;
+	t_cmd	*cmd;
 
 	(void)argc;
 	(void)argv;
@@ -85,9 +75,11 @@ int	main(int argc, char **argv, char **envp)
 		if (cmd_line)
 		{
 			mini.token_list = NULL;
-			init_token_list(&mini.token_list, cmd_line);
-			ft_execute_commad(&mini, envp);
-			free_token_list(mini.token_list);
+			init_token_list(&mini.token_list, cmd_line); // TOKENIZA
+			cmd = parse_command(mini.token_list); // PARSEIA
+			ft_execute_command(&mini, cmd, envp); // EXECUTA
+			free_cmd(cmd); // IMPLEMENTAR - LIBERA CMD
+			free_token_list(mini.token_list); // LIBERA TOKENS
 		}
 		free(cmd_line);
 	}

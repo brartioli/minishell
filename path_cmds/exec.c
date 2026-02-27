@@ -6,34 +6,26 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 18:48:06 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/12 18:20:24 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/27 15:03:12 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_exec(t_token *cmd, char **envp)
+void	ft_exec(t_cmd *cmd, char **envp)
 {
-	char	**args;
 	char	*path;
 
-	if (!cmd || !cmd->value)
+	if (!cmd || !cmd->args || !cmd->args[0])
 		exit (1);
-	if (handle_redirects(cmd) == -1)
-		exit(1);
-	args = build_args(cmd);
-	if (!args)
-		exit (1);
-	path = get_full_path(args[0], envp);
+	path = get_full_path(cmd->args[0], envp);
 	if (!path)
 	{
-		ft_printf("%s: command not found\n", args[0]);
-		free_args(args);
-		exit (127);
+		ft_printf("%s: command not found\n", cmd->args[0]);
+		exit(127);
 	}
-	execve(path, args, envp);
+	execve(path, cmd->args, envp);
 	perror("execve");
 	free(path);
-	free_args(args);
 	exit(1);
 }
