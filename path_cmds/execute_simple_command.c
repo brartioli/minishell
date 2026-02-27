@@ -6,13 +6,13 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 19:04:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/26 21:14:09 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/27 15:55:57 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_execute_simple_command(t_cmd *cmd, char **envp)
+void	ft_execute_simple_command(t_cmd *cmd, char **envp, t_mini *mini)
 {
 	pid_t	pid;
 
@@ -27,7 +27,10 @@ void	ft_execute_simple_command(t_cmd *cmd, char **envp)
 	else if (pid == 0)
 	{
 		apply_redirects(cmd);
-		ft_exec(cmd, envp);
+		if (ft_is_builtin(cmd->args[0]))
+			exit(ft_execute_builtin(mini, cmd));
+		else
+			ft_exec(cmd, envp);
 	}
 	else
 		waitpid(pid, NULL, 0);

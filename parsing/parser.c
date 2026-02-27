@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 18:37:16 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/27 14:42:32 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/27 15:52:32 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,14 @@ void	free_cmd(t_cmd *cmd)
 	if (cmd->outfile)
 		free(cmd->outfile);
 	free(cmd);
+}
+
+int	has_redirect(t_cmd *cmd)
+{
+	if (!cmd)
+		return (0);
+
+	if (cmd->infile || cmd->outfile)
+		return (1);
+	return (0);
 }
