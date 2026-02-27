@@ -6,13 +6,13 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/27 15:04:39 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/27 15:59:27 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_is_builtin(char *cmd)
+int	ft_is_builtin(char *cmd)
 {
 	if (ft_str_equal(cmd, "echo"))
 		return (1);
@@ -48,9 +48,14 @@ void	ft_execute_command(t_mini *mini, t_cmd *cmd, char **envp)
 	if (!cmd || !cmd->args || !cmd->args[0])
 		return ;
 	if (ft_is_builtin(cmd->args[0]))
-		mini->exit_status = ft_execute_builtin(mini, cmd);
+	{
+		if (has_redirect(cmd))
+			ft_execute_simple_command(cmd, envp, mini);
+		else
+			mini->exit_status = ft_execute_builtin(mini, cmd);
+	}
 	else
-		ft_execute_simple_command(cmd, envp);
+		ft_execute_simple_command(cmd, envp, mini);
 }
 
 int	main(int argc, char **argv, char **envp)
