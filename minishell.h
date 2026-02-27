@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/25 10:07:00 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/27 15:05:19 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_cmd
 // FUNCTIONS
 
 //Main
-void	ft_execute_commad(t_mini *mini, char **envp);
+void	ft_execute_command(t_mini *mini, t_cmd *cmd, char **envp);
 
 // Tokens
 void	init_token_list(t_token **token_list, char *cmd_line);
@@ -72,13 +72,26 @@ void	add_token_back(t_token **token_list, t_token *new_token);
 void	print_token_list(t_token *token_list);
 void	free_token_list(t_token *token_list);
 
+// Parsing
+t_cmd	**parse_input(t_token *token_list);
+t_cmd	*parse_command(t_token *token_list);
+void	process_quotes(t_token *token_list);
+void	expand_variables(t_token *token_list);
+t_cmd	*init_command(void);
+void	free_cmd(t_cmd *cmd);
+
+// Extracting
+char	*extract_infile(t_token *token_list);
+char	*extract_outfile(t_token *token_list);
+int		has_append_flag(t_token *token_list);
+
 //Env
 t_env	*init_env(char **envp);
 void	add_env_back(t_env **env_list, t_env *new_env);
 t_env	*create_env_node(char *name, char *value);
 
 //Builtin
-int	ft_execute_bultin(t_mini *mini);
+int ft_execute_builtin(t_mini *mini, t_cmd *cmd);
 int	ft_execute_pwd(void);
 int ft_execute_env(t_mini *mini);
 int ft_execute_exit(t_mini	*mini);
@@ -87,11 +100,11 @@ int ft_execute_exit(t_mini	*mini);
 int is_valid_number(char *str);
 
 //Path execution
-void	ft_exec(t_token *cmd, char **envp);
-void	ft_execute_simple_command(t_token *token_list, char **envp);
+void	ft_exec(t_cmd *cmd, char **envp);
+void	ft_execute_simple_command(t_cmd *cmd, char **envp);
 char	*get_path_from_env(char **env);
 char	*get_full_path(char *cmd, char **envp);
-int		handle_redirects(t_token *token_list);
+void	apply_redirects(t_cmd *cmd);
 
 //Args handling
 int		count_args(t_token *start);

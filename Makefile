@@ -6,7 +6,7 @@
 #    By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 18:14:51 by bfernan2          #+#    #+#              #
-#    Updated: 2026/02/12 18:21:18 by malcosta         ###   ########.fr        #
+#    Updated: 2026/02/26 20:52:14 by malcosta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,16 @@ path_cmds/exec.c \
 path_cmds/execute_simple_command.c \
 path_cmds/execute_pipeline.c \
 path_cmds/pipeline_utils.c \
-path_cmds/build_args.c \
 path_cmds/get_path.c \
-path_cmds/redirects.c\
+path_cmds/redirects.c \
 builtin_cmds/builtins.c \
 builtin_cmds/execute_pwd.c \
 builtin_cmds/execute_env.c \
 builtin_cmds/exit_utils.c \
-builtin_cmds/execute_exit.c\
+builtin_cmds/execute_exit.c \
+parsing/parser.c \
+parsing/extracting.c \
+parsing/build_args.c \
 
 
 LIBFT_DIR = ./libft/
