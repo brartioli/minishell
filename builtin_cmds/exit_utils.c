@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_utils.c                                   :+:      :+:    :+:   */
+/*   exit_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:49:24 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/07 13:52:59 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/02/27 17:27:40 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 int is_valid_number(char *str)
 {
-    int i;
+	int i;
 
-    i = 0;
-    if (!str || !str[0])
-        return (0);
-    if (str[i] == '+' || str[i] == '-')
-        i++;
-    if (!str[i])
-        return (0);
-    while (str[i])
-    {
-        if (!(ft_isdigit (str[i])))
-            return (0);
-        i++;
-    }
-    return (1);
+	i = 0;
+	if (!str || !str[0])
+		return (0);
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	if (!str[i])
+		return (0);
+	while (str[i])
+	{
+		if (!(ft_isdigit (str[i])))
+			return (0);
+		i++;
+	}
+	return (1);
 }

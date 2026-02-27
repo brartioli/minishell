@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   execute_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 18:40:24 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/11 18:41:20 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/02/27 17:27:06 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int ft_execute_pwd(void)
 {
-    char    *cwd;
+	char	*cwd;
 
-    cwd = getcwd(NULL, 0);
-    if (!cwd)
-    {
-        perror("pwd");
-        return (1);
-    }
-    ft_printf("%s\n",cwd);
-    free (cwd);
-    return (0);
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+	{
+		perror("pwd");
+		return (1);
+	}
+	ft_printf("%s\n",cwd);
+	free (cwd);
+	return (0);
 }
