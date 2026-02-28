@@ -6,35 +6,37 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 18:37:16 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/25 10:25:00 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/27 15:52:32 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmd	**parse_input()
-{
+// t_cmd	**parse_input(t_token *token_list)
+// {
 
-}
+// }
 
 t_cmd	*parse_command(t_token *token_list)
 {
 	t_cmd	*cmd;
 
-	cmd = init_command(token_list);
+	cmd = init_command();
 	if (!cmd)
 		return (NULL);
-	process_quotes(token_list);
-	expand_variables(token_list);
+	// process_quotes(token_list);
+	// expand_variables(token_list);
 
 	cmd->infile = extract_infile(token_list);
 	cmd->outfile = extract_outfile(token_list);
-	cmd->append = extract_has_append(token_list);
-	cmd->args = extract_args(token_list);
+	cmd->append = has_append_flag(token_list);
+	cmd->args = build_args(token_list);
+
+	return (cmd);
 }
 
 
-t_cmd	*init_command(t_token *token_list)
+t_cmd	*init_command(void)
 {
 	t_cmd	*cmd;
 
@@ -46,4 +48,37 @@ t_cmd	*init_command(t_token *token_list)
 	cmd->outfile = NULL;
 	cmd->append = 0;
 	return (cmd);
+}
+
+void	free_cmd(t_cmd *cmd)
+{
+	int	i;
+
+	if (!cmd)
+		return ;
+	if (cmd->args)
+	{
+		i = 0;
+		while (cmd->args[i])
+		{
+			free(cmd->args[i]);
+			i++;
+		}
+		free(cmd->args);
+	}
+	if (cmd->infile)
+		free(cmd->infile);
+	if (cmd->outfile)
+		free(cmd->outfile);
+	free(cmd);
+}
+
+int	has_redirect(t_cmd *cmd)
+{
+	if (!cmd)
+		return (0);
+
+	if (cmd->infile || cmd->outfile)
+		return (1);
+	return (0);
 }
