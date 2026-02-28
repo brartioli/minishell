@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 19:26:51 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/26 20:41:00 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/02/28 11:53:06 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ int	ft_execute_builtin(t_mini *mini, t_cmd *cmd)
 		return (ft_execute_env(mini, cmd));
 	else if (ft_str_equal(cmd_name, "exit"))
 		return (ft_execute_exit(mini));
+	else if (ft_str_equal(cmd_name, "echo"))
+		return (ft_execute_echo(mini, cmd));
 	return (1);
 }

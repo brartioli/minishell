@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/27 15:59:27 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/28 12:01:21 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,6 @@ int	ft_is_builtin(char *cmd)
 	return (0);
 }
 
-// static int	has_pipes(t_token *token_list)
-// {
-// 	t_token	*ptr;
-
-// 	ptr = token_list;
-// 	while (ptr)
-// 	{
-// 		if (ft_str_equal(ptr->type, TYPE_PIPE))
-// 			return (1);
-// 		ptr = ptr->next;
-// 	}
-// 	return (0);
-// }
 
 void	ft_execute_command(t_mini *mini, t_cmd *cmd, char **envp)
 {
