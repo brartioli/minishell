@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extrating.c                                        :+:      :+:    :+:   */
+/*   extracting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 20:31:57 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/26 20:44:56 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/28 14:26:09 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*extract_infile(t_token *token_list)
 	ptr = token_list;
 	while (ptr)
 	{
+		if (ft_str_equal(ptr->type, TYPE_PIPE))
+			break;
 		if (ft_str_equal(ptr->type, TYPE_REDIR_IN))
 		{
 			if (ptr->next && ptr->next->value)
@@ -29,18 +31,20 @@ char	*extract_infile(t_token *token_list)
 	return (NULL);
 }
 
-char	*extract_outfile(t_token *token_list)
+char *extract_outfile(t_token *token_list)
 {
-	t_token	*ptr;
+	t_token *ptr;
 
 	ptr = token_list;
 	while (ptr)
 	{
+		if (ft_str_equal(ptr->type, TYPE_PIPE))
+			break;
 		if (ft_str_equal(ptr->type, TYPE_REDIR_OUT) ||
 			ft_str_equal(ptr->type, TYPE_REDIR_APPEND))
 		{
 			if (ptr->next && ptr->next->value)
-				return (ft_strdup(ptr->next->value));
+			return (ft_strdup(ptr->next->value));
 		}
 		ptr = ptr->next;
 	}
@@ -54,6 +58,8 @@ int	has_append_flag(t_token *token_list)
 	ptr = token_list;
 	while (ptr)
 	{
+		if (ft_str_equal(ptr->type, TYPE_PIPE))
+			break;
 		if (ft_str_equal(ptr->type, TYPE_REDIR_APPEND))
 			return (1);
 		ptr = ptr->next;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipeline_utils.c                                   :+:      :+:    :+:   */
+/*   pipeline_parsing.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 18:54:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/11 20:25:35 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/02/28 12:22:00 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,18 @@ t_token	**split_commands_by_pipe(t_token *token_list, int cmds_quant)
 	}
 	cmds[i + 1] = NULL;
 	return (cmds);
+}
+
+int	has_pipes(t_token *token_list)
+{
+	t_token	*ptr;
+
+	ptr = token_list;
+	while (ptr)
+	{
+		if (ft_str_equal(ptr->type, TYPE_PIPE))
+			return (1);
+		ptr = ptr->next;
+	}
+	return (0);
 }

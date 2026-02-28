@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execute_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 20:43:06 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/26 20:43:10 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/02/28 14:30:09 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include    "minishell.h"
+#include "minishell.h"
 
 static int	is_n_flag(char *arg)
 {

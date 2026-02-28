@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/27 15:59:27 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/28 12:04:28 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,20 @@ int	ft_is_builtin(char *cmd)
 	return (0);
 }
 
-// static int	has_pipes(t_token *token_list)
-// {
-// 	t_token	*ptr;
-
-// 	ptr = token_list;
-// 	while (ptr)
-// 	{
-// 		if (ft_str_equal(ptr->type, TYPE_PIPE))
-// 			return (1);
-// 		ptr = ptr->next;
-// 	}
-// 	return (0);
-// }
-
 void	ft_execute_command(t_mini *mini, t_cmd *cmd, char **envp)
 {
+	t_cmd	**cmds;
+	int		cmd_count;
+	
+	if (has_pipes(mini->token_list))
+	{
+		cmds = parse_input(mini->token_list);
+		cmd_count = count_commands(mini->token_list);
+		ft_execute_pipeline(cmds, cmd_count, envp);
+		// TO DO: free_cmds(cmds, cmd_count)
+		return ;
+		
+	}
 	if (!cmd || !cmd->args || !cmd->args[0])
 		return ;
 	if (ft_is_builtin(cmd->args[0]))
