@@ -98,7 +98,7 @@ int ft_execute_builtin(t_mini *mini, t_cmd *cmd);
 int	ft_execute_pwd(void);
 int ft_execute_env(t_mini *mini, t_cmd *cmd);
 int ft_execute_exit(t_mini	*mini);
-int	ft_execute_echo(t_mini *mini);
+int	ft_execute_echo(t_mini *mini, t_cmd *cmd);
 
 //Utils Builtin
 int is_valid_number(char *str);
