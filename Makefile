@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+         #
+#    By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 18:14:51 by bfernan2          #+#    #+#              #
-#    Updated: 2026/02/26 20:41:25 by bfernan2         ###   ########.fr        #
+#    Updated: 2026/02/28 11:51:50 by malcosta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ env/env.c env/env_utils.c \
 path_cmds/exec.c \
 path_cmds/execute_simple_command.c \
 path_cmds/execute_pipeline.c \
-path_cmds/pipeline_utils.c \
 path_cmds/get_path.c \
 path_cmds/redirects.c \
 builtin_cmds/builtins.c \
@@ -30,6 +29,7 @@ builtin_cmds/execute_exit.c \
 parsing/parser.c \
 parsing/extracting.c \
 parsing/build_args.c \
+parsing/pipeline_parsing.c \
 builtin_cmds/execute_echo.c\
 
 

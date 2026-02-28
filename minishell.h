@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/28 12:00:34 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/02/28 12:09:31 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	expand_variables(t_token *token_list);
 t_cmd	*init_command(void);
 void	free_cmd(t_cmd *cmd);
 int		has_redirect(t_cmd *cmd);
+t_cmd	**parse_input(t_token *token_list);
 
 // Extracting
 char	*extract_infile(t_token *token_list);
@@ -117,13 +118,14 @@ char	**build_args(t_token *start);
 void	free_args(char **args);
 
 //Pipeline execution
-void	ft_execute_pipeline(t_token **cmds, int cmds_quant, char **envp);
+void	ft_execute_pipeline(t_cmd **cmds, int cmds_quant, char **envp);
 void	close_all_pipes(int **pipes, int cmds_quant);
 void	wait_all_children(pid_t *pids, int cmds_quant);
 
-//Pipeline utils
+//Pipeline parsing utils
 int		count_commands(t_token *token_list);
 t_token	**split_commands_by_pipe(t_token *token_list, int cmds_quant);
 int		**create_pipes(int cmds_quant);
+int		has_pipes(t_token *token_list);
 
 #endif
