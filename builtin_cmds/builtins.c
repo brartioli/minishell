@@ -6,7 +6,7 @@
 /*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 19:26:51 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/28 11:53:06 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/02/28 15:58:57 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ int	ft_execute_builtin(t_mini *mini, t_cmd *cmd)
 		return (ft_execute_exit(mini));
 	else if (ft_str_equal(cmd_name, "echo"))
 		return (ft_execute_echo(mini, cmd));
+	else if (ft_str_equal(cmd_name, "unset"))
+		return (ft_execute_unset(mini, cmd));
 	return (1);
 }

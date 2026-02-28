@@ -6,7 +6,7 @@
 #    By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 18:14:51 by bfernan2          #+#    #+#              #
-#    Updated: 2026/02/26 20:41:25 by bfernan2         ###   ########.fr        #
+#    Updated: 2026/02/28 15:14:24 by bfernan2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ parsing/parser.c \
 parsing/extracting.c \
 parsing/build_args.c \
 builtin_cmds/execute_echo.c\
-
+builtin_cmds/execute_unset.c\
 
 LIBFT_DIR = ./libft/
 LIBFT = $(LIBFT_DIR)libft.a
