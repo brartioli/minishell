@@ -6,7 +6,7 @@
 #    By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 18:14:51 by bfernan2          #+#    #+#              #
-#    Updated: 2026/02/28 11:51:50 by malcosta         ###   ########.fr        #
+#    Updated: 2026/02/28 15:14:24 by bfernan2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ parsing/extracting.c \
 parsing/build_args.c \
 parsing/pipeline_parsing.c \
 builtin_cmds/execute_echo.c\
-
+builtin_cmds/execute_unset.c\
 
 LIBFT_DIR = ./libft/
 LIBFT = $(LIBFT_DIR)libft.a
