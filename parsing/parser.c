@@ -6,16 +6,34 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 18:37:16 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/27 15:52:32 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/28 12:19:11 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// t_cmd	**parse_input(t_token *token_list)
-// {
+t_cmd	**parse_input(t_token *token_list)
+{
+	t_cmd	**cmds;
+	t_token	**token_groups;
+	int		cmd_count;
+	int		i;
 
-// }
+	cmd_count = count_commands(token_list);
+	token_groups = split_commands_by_pipe(token_list, cmd_count);
+	cmds = malloc(sizeof(t_cmd *) * (cmd_count + 1));
+	if (!cmds)
+		return (NULL);
+	i = 0;
+	while (i < cmd_count)
+	{
+		cmds[i] = parse_command(token_groups[i]);
+		i++;
+	}
+	cmds[i] = NULL;
+	free(token_groups);
+	return (cmds);
+}
 
 t_cmd	*parse_command(t_token *token_list)
 {
