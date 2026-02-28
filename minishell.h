@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/27 16:08:47 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/02/26 20:40:41 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int ft_execute_builtin(t_mini *mini, t_cmd *cmd);
 int	ft_execute_pwd(void);
 int ft_execute_env(t_mini *mini, t_cmd *cmd);
 int ft_execute_exit(t_mini	*mini);
+int	ft_execute_echo(t_mini *mini);
 
 //Utils Builtin
 int is_valid_number(char *str);

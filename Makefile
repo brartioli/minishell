@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+         #
+#    By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 18:14:51 by bfernan2          #+#    #+#              #
-#    Updated: 2026/02/26 20:52:14 by malcosta         ###   ########.fr        #
+#    Updated: 2026/02/26 20:41:25 by bfernan2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ builtin_cmds/execute_exit.c \
 parsing/parser.c \
 parsing/extracting.c \
 parsing/build_args.c \
+builtin_cmds/execute_echo.c\
 
 
 LIBFT_DIR = ./libft/
