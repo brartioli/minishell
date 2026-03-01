@@ -1,0 +1,46 @@
+
+ERROS E COISAS PARA CONFERIR (RÉGUA)
+
+1. quando clico dois tabs, ele abre as coisas, é assim mesmo? tipo faz um ls?
+
+
+2. minishell> /etc/ls
+/etc/ls: command not found
+minishell> 
+
+bash:
+malcosta@c1r7p2 ~/Documents/projetos/minishell
+ % bash
+malcosta@c1r7p2:~/Documents/projetos/minishell$ /etc/ls
+bash: /etc/ls: No such file or directory
+malcosta@c1r7p2:~/Documents/projetos/minishell$ 
+
+
+3. comando exit (checar as possibilidades)
+
+4. valor de retorno de um processo
+
+9. export
+
+10. unset
+
+11. cd 
+
+12. pwd
+
+13. caminho relativo
+
+14. environment path
+
+15. redirect
+
+16. pipes
+
+17. seja louco e historico
+
+18. variaveis de ambiente
+
+19. leaks
+
+20. norminette
+
