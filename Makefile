@@ -6,7 +6,7 @@
 #    By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 18:14:51 by bfernan2          #+#    #+#              #
-#    Updated: 2026/03/01 18:49:45 by malcosta         ###   ########.fr        #
+#    Updated: 2026/03/01 19:10:00 by malcosta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ parsing/expand_utils.c \
 parsing/process_quotes.c \
 builtin_cmds/execute_echo.c\
 builtin_cmds/execute_unset.c\
+signals/signals.c\
 
 LIBFT_DIR = ./libft/
 LIBFT = $(LIBFT_DIR)libft.a

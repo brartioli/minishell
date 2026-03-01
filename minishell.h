@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/01 18:09:38 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/01 19:03:47 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,9 @@ t_token	**split_commands_by_pipe(t_token *token_list, int cmds_quant);
 int		**create_pipes(int cmds_quant);
 int		has_pipes(t_token *token_list);
 
-
+//Signals
+void setup_signals(void);
+void	handle_sigquit(int sig);
+void	handle_sigint(int sig);
 
 #endif

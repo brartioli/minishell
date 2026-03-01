@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/01 18:13:05 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/01 19:13:53 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,38 @@ void	ft_execute_command(t_mini *mini, t_cmd *cmd, char **envp)
 		ft_execute_simple_command(cmd, envp, mini);
 }
 
+
+
+
+static void	handle_args(int ac, char **av)
+{
+	(void)av;
+	
+	if (ac != 1)
+	{
+		ft_putstr_fd("Usage: ./minishell (with no other arguments) \n", 2);
+		exit (1);
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_mini	mini;
 	char	*cmd_line;
 	t_cmd	*cmd;
 
-	(void)argc;
-	(void)argv;
+	handle_args(argc, argv);
+	setup_signals();
 	mini.env_list = init_env(envp);
 	mini.exit_status = 0;
 	while (1)
 	{
 		cmd_line = readline("minishell> ");
 		if (!cmd_line)
+		{
+			ft_putstr_fd("exit\n", 1);
 			break ;
+		}
 		if (*cmd_line)
 			add_history(cmd_line);
 		mini.token_list = NULL;
