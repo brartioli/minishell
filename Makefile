@@ -6,7 +6,7 @@
 #    By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 18:14:51 by bfernan2          #+#    #+#              #
-#    Updated: 2026/02/28 15:14:24 by bfernan2         ###   ########.fr        #
+#    Updated: 2026/03/01 18:49:45 by malcosta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ MAKEFLAGS += --silent
 
 NAME = minishell
 
-SRC = main.c tokenize/token_utils.c tokenize/tokenize.c \
+SRC = main.c tokenize/token_utils.c tokenize/tokenize.c tokenize/split_cmd.c\
 env/env.c env/env_utils.c \
 path_cmds/exec.c \
 path_cmds/execute_simple_command.c \
@@ -32,6 +32,7 @@ parsing/build_args.c \
 parsing/pipeline_parsing.c \
 parsing/expand.c \
 parsing/expand_utils.c \
+parsing/process_quotes.c \
 builtin_cmds/execute_echo.c\
 builtin_cmds/execute_unset.c\
 

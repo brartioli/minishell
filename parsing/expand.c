@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 10:21:47 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/01 17:39:25 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/01 18:53:15 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,19 @@
 
 void expand_variables(t_token *token_list, t_env *env_list, int exit_status)
 {
-    t_token *ptr;
-    char    *new_value;
+	t_token *ptr;
+	char	*new_value;
 
-    ptr = token_list;
-    while (ptr)
-    {
-        if (ft_str_equal(ptr->type, TYPE_WORD))
-        {
+	ptr = token_list;
+	while (ptr)
+	{
+		if (ft_str_equal(ptr->type, TYPE_WORD))
+		{
+            if (ptr->value[0] == '\'')
+            {
+                ptr = ptr->next;
+                continue;
+            }
             if (ft_strchr(ptr->value, '$'))
             {
                 new_value = expand_token(ptr->value, env_list, exit_status);
