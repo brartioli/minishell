@@ -30,6 +30,8 @@ parsing/parser.c \
 parsing/extracting.c \
 parsing/build_args.c \
 parsing/pipeline_parsing.c \
+parsing/expand.c \
+parsing/expand_utils.c \
 builtin_cmds/execute_echo.c\
 builtin_cmds/execute_unset.c\
 

@@ -74,14 +74,21 @@ void	print_token_list(t_token *token_list);
 void	free_token_list(t_token *token_list);
 
 // Parsing
-t_cmd	**parse_input(t_token *token_list);
-t_cmd	*parse_command(t_token *token_list);
+t_cmd **parse_input(t_token *token_list, t_env *env_list, int exit_status);
+t_cmd *parse_command(t_token *token_list, t_env *env_list, int exit_status);
 void	process_quotes(t_token *token_list);
-void	expand_variables(t_token *token_list);
 t_cmd	*init_command(void);
 void	free_cmd(t_cmd *cmd);
 int		has_redirect(t_cmd *cmd);
-t_cmd	**parse_input(t_token *token_list);
+
+//Expand variables
+int 	get_var_name_len(char *var_name);
+char	*extract_var_name(char *start);
+char *build_expanded_str(char *str, char *dollar_pos, char *value, int var_len);
+char *expand_token(char *str, t_env *env_list, int exit_status);
+char	*get_env_value(t_env *env_list, char *var_name);
+void expand_variables(t_token *token_list, t_env *env_list, int exit_status);
+
 
 // Extracting
 char	*extract_infile(t_token *token_list);
@@ -128,5 +135,7 @@ int		count_commands(t_token *token_list);
 t_token	**split_commands_by_pipe(t_token *token_list, int cmds_quant);
 int		**create_pipes(int cmds_quant);
 int		has_pipes(t_token *token_list);
+
+
 
 #endif
