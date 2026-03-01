@@ -20,14 +20,6 @@ malcosta@c1r7p2:~/Documents/projetos/minishell$
 
 4. valor de retorno de um processo
 
-5. sinais
-
-6. aspas duplas
-
-7. aspas simples
-
-8. env
-
 9. export
 
 10. unset
