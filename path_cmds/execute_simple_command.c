@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 19:04:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/27 15:55:57 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/01 19:16:50 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_execute_simple_command(t_cmd *cmd, char **envp, t_mini *mini)
 {
 	pid_t	pid;
+	int		exit_status;
 
 	if (!cmd || !cmd->args || !cmd->args[0])
 		return ;
@@ -33,5 +34,11 @@ void	ft_execute_simple_command(t_cmd *cmd, char **envp, t_mini *mini)
 			ft_exec(cmd, envp);
 	}
 	else
-		waitpid(pid, NULL, 0);
+	{
+		waitpid(pid, &exit_status, 0);
+		if (WIFEXITED(exit_status))
+			mini->exit_status = WEXITSTATUS(exit_status);
+		else if (WIFSIGNALED(exit_status))
+			mini->exit_status = 128 + WTERMSIG(exit_status);
+	}
 }

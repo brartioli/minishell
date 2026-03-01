@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/28 12:04:28 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/01 19:13:53 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,34 +56,46 @@ void	ft_execute_command(t_mini *mini, t_cmd *cmd, char **envp)
 		ft_execute_simple_command(cmd, envp, mini);
 }
 
+
+
+
+static void	handle_args(int ac, char **av)
+{
+	(void)av;
+	
+	if (ac != 1)
+	{
+		ft_putstr_fd("Usage: ./minishell (with no other arguments) \n", 2);
+		exit (1);
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_mini	mini;
 	char	*cmd_line;
 	t_cmd	*cmd;
 
-	(void)argc;
-	(void)argv;
+	handle_args(argc, argv);
+	setup_signals();
 	mini.env_list = init_env(envp);
 	mini.exit_status = 0;
 	while (1)
 	{
 		cmd_line = readline("minishell> ");
-		if (!cmd_line || ft_str_equal(cmd_line, "exit"))
+		if (!cmd_line)
 		{
-			if (cmd_line)
-				free(cmd_line);
+			ft_putstr_fd("exit\n", 1);
 			break ;
 		}
-		if (cmd_line)
-		{
-			mini.token_list = NULL;
-			init_token_list(&mini.token_list, cmd_line); // TOKENIZA
-			cmd = parse_command(mini.token_list, mini.env_list, mini.exit_status); // PARSEIA
-			ft_execute_command(&mini, cmd, envp); // EXECUTA
-			free_cmd(cmd); // IMPLEMENTAR - LIBERA CMD
-			free_token_list(mini.token_list); // LIBERA TOKENS
-		}
+		if (*cmd_line)
+			add_history(cmd_line);
+		mini.token_list = NULL;
+		init_token_list(&mini.token_list, cmd_line); // TOKENIZA		
+		cmd = parse_command(mini.token_list, mini.env_list, mini.exit_status); // PARSEIA
+		ft_execute_command(&mini, cmd, envp); // EXECUTA
+		free_cmd(cmd); // IMPLEMENTAR - LIBERA CMD
+		free_token_list(mini.token_list); // LIBERA TOKENS
 		free(cmd_line);
 	}
 	return (mini.exit_status);

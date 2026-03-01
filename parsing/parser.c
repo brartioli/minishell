@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 18:37:16 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/28 12:19:11 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/01 18:52:26 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,10 @@ t_cmd *parse_command(t_token *token_list, t_env *env_list, int exit_status)
     t_cmd *cmd;
     
     cmd = init_command();
-    if (!cmd)
-        return (NULL);
-    
-    //process_quotes(token_list);
-    expand_variables(token_list, env_list, exit_status);  
-    
+	if (!cmd)
+		return (NULL);
+    expand_variables(token_list, env_list, exit_status);
+	process_quotes(token_list);
     cmd->infile = extract_infile(token_list);
     cmd->outfile = extract_outfile(token_list);
     cmd->append = has_append_flag(token_list);

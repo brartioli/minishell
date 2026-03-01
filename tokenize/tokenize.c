@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 14:08:57 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/11 19:57:25 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/01 18:10:05 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_token_list(t_token **token_list, char *cmd_line)
 	int		i;
 	char	*type;
 
-	cmd_line_split = ft_split(cmd_line, ' ');
+	cmd_line_split = split_cmd(cmd_line);
 	i = 0;
 	while (cmd_line_split[i])
 	{

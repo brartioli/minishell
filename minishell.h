@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/28 15:14:12 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/03/01 19:03:47 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <readline/readline.h>
+# include <readline/history.h>
 # include "libft/libft.h"
 # include <sys/wait.h>
 
@@ -66,12 +67,13 @@ typedef struct s_cmd
 void	ft_execute_command(t_mini *mini, t_cmd *cmd, char **envp);
 int		ft_is_builtin(char *cmd);
 
-// Tokens
+// Tokenize
 void	init_token_list(t_token **token_list, char *cmd_line);
 t_token	*create_token(char *value, char *type);
 void	add_token_back(t_token **token_list, t_token *new_token);
 void	print_token_list(t_token *token_list);
 void	free_token_list(t_token *token_list);
+char	**split_cmd(char *str);
 
 // Parsing
 t_cmd **parse_input(t_token *token_list, t_env *env_list, int exit_status);
@@ -136,6 +138,9 @@ t_token	**split_commands_by_pipe(t_token *token_list, int cmds_quant);
 int		**create_pipes(int cmds_quant);
 int		has_pipes(t_token *token_list);
 
-
+//Signals
+void setup_signals(void);
+void	handle_sigquit(int sig);
+void	handle_sigint(int sig);
 
 #endif
