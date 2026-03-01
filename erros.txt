@@ -44,3 +44,5 @@ malcosta@c1r7p2:~/Documents/projetos/minishell$
 
 20. norminette
 
+21. readme
+
