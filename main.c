@@ -36,7 +36,7 @@ void	ft_execute_command(t_mini *mini, t_cmd *cmd, char **envp)
 	
 	if (has_pipes(mini->token_list))
 	{
-		cmds = parse_input(mini->token_list);
+		cmds = parse_input(mini->token_list, mini->env_list, mini->exit_status);
 		cmd_count = count_commands(mini->token_list);
 		ft_execute_pipeline(cmds, cmd_count, envp);
 		// TO DO: free_cmds(cmds, cmd_count)
@@ -79,7 +79,7 @@ int	main(int argc, char **argv, char **envp)
 		{
 			mini.token_list = NULL;
 			init_token_list(&mini.token_list, cmd_line); // TOKENIZA
-			cmd = parse_command(mini.token_list); // PARSEIA
+			cmd = parse_command(mini.token_list, mini.env_list, mini.exit_status); // PARSEIA
 			ft_execute_command(&mini, cmd, envp); // EXECUTA
 			free_cmd(cmd); // IMPLEMENTAR - LIBERA CMD
 			free_token_list(mini.token_list); // LIBERA TOKENS
