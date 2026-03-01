@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 18:48:06 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/27 15:03:12 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/01 17:46:21 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_exec(t_cmd *cmd, char **envp)
 	if (!path)
 	{
 		ft_printf("%s: command not found\n", cmd->args[0]);
+		//free_args(args);
 		exit(127);
 	}
 	execve(path, cmd->args, envp);
