@@ -32,7 +32,7 @@ malcosta@c1r7p2:~/Documents/projetos/minishell$
 
 14. environment path
 
-15. redirect
+15. redirect e heredoc
 
 16. pipes
 
