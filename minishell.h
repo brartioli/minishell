@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/02 18:43:19 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/02 20:40:37 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void	process_export_arg(t_mini *mini, char *arg);
 void	split_var_value(char *arg, char **name, char **value);
 int		is_valid_identifier(char *name);
 void	add_or_update_env(t_mini *mini, char *name, char *value);
+int		ft_execute_cd(t_mini *mini, t_cmd *cmd);
 
 
 //Utils Builtin
