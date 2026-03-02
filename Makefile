@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+         #
+#    By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 18:14:51 by bfernan2          #+#    #+#              #
-#    Updated: 2026/03/02 18:44:11 by malcosta         ###   ########.fr        #
+#    Updated: 2026/03/02 19:28:52 by bfernan2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ parsing/expand_utils.c \
 parsing/process_quotes.c \
 builtin_cmds/execute_echo.c\
 builtin_cmds/execute_unset.c\
+builtin_cmds/execute_cd.c\
 signals/signals.c\
 
 LIBFT_DIR = ./libft/
