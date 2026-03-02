@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/01 19:03:47 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/02 18:43:19 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,20 @@ void	add_env_back(t_env **env_list, t_env *new_env);
 t_env	*create_env_node(char *name, char *value);
 
 //Builtin
-int ft_execute_builtin(t_mini *mini, t_cmd *cmd);
-int	ft_execute_pwd(void);
-int ft_execute_env(t_mini *mini, t_cmd *cmd);
-int ft_execute_exit(t_mini	*mini);
-int	ft_execute_echo(t_mini *mini, t_cmd *cmd);
-int ft_execute_unset(t_mini *mini, t_cmd *cmd);
+int		ft_execute_builtin(t_mini *mini, t_cmd *cmd);
+int		ft_execute_pwd(void);
+int		ft_execute_env(t_mini *mini, t_cmd *cmd);
+int		ft_execute_exit(t_mini	*mini);
+int		ft_execute_echo(t_mini *mini, t_cmd *cmd);
+int		ft_execute_unset(t_mini *mini, t_cmd *cmd);
+int		ft_execute_export(t_mini *mini, t_cmd *cmd);
+int		ft_execute_export(t_mini *mini, t_cmd *cmd);
+void	print_export(t_env *env_list);
+void	process_export_arg(t_mini *mini, char *arg);
+void	split_var_value(char *arg, char **name, char **value);
+int		is_valid_identifier(char *name);
+void	add_or_update_env(t_mini *mini, char *name, char *value);
+
 
 //Utils Builtin
 int is_valid_number(char *str);

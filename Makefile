@@ -6,7 +6,7 @@
 #    By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 18:14:51 by bfernan2          #+#    #+#              #
-#    Updated: 2026/03/01 19:10:00 by malcosta         ###   ########.fr        #
+#    Updated: 2026/03/02 18:44:11 by malcosta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ builtin_cmds/execute_pwd.c \
 builtin_cmds/execute_env.c \
 builtin_cmds/exit_utils.c \
 builtin_cmds/execute_exit.c \
+builtin_cmds/execute_export.c \
+builtin_cmds/export_utils.c \
 parsing/parser.c \
 parsing/extracting.c \
 parsing/build_args.c \
