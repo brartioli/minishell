@@ -15,10 +15,6 @@ malcosta@c1r7p2:~/Documents/projetos/minishell$ /etc/ls
 bash: /etc/ls: No such file or directory
 malcosta@c1r7p2:~/Documents/projetos/minishell$ 
 
-3. comando exit (checar as possibilidades)
-
-4. valor de retorno de um processo
-
 11. cd 
 
 12. pwd
