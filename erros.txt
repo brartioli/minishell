@@ -1,21 +1,7 @@
 
 ERROS E COISAS PARA CONFERIR (RÉGUA)
 
-1. quando clico dois tabs, ele abre as coisas, é assim mesmo? tipo faz um ls?
-
-
-2. minishell> /etc/ls
-/etc/ls: command not found
-minishell> 
-
-bash:
-malcosta@c1r7p2 ~/Documents/projetos/minishell
- % bash
-malcosta@c1r7p2:~/Documents/projetos/minishell$ /etc/ls
-bash: /etc/ls: No such file or directory
-malcosta@c1r7p2:~/Documents/projetos/minishell$ 
-
-11. cd 
+11. cd
 
 12. pwd
 
