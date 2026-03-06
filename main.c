@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/02 18:48:07 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/04 18:49:28 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,6 @@ void	ft_execute_command(t_mini *mini, t_cmd *cmd, char **envp)
 	else
 		ft_execute_simple_command(cmd, envp, mini);
 }
-
-
-
 
 static void	handle_args(int ac, char **av)
 {
