@@ -1,9 +1,9 @@
 
 ERROS E COISAS PARA CONFERIR (RÉGUA)
 
-15. redirect e heredoc
+Misturando heredoc e pipes 
+minishell> cat << EOF | grep test
 
-18. variaveis de ambiente
 
 19. leaks
 

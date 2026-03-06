@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 10:21:47 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/01 18:53:15 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/06 20:33:00 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,13 @@ char *expand_token(char *str, t_env *env_list, int exit_status)
 	char *var_name;
 	char *var_value;
 	char *result;
+	char *temp;
 	int  var_len;
 
 	dollar_pos = ft_strchr(str, '$');
 	if (!dollar_pos)
 		return (ft_strdup(str));
+	
 	if (dollar_pos[1] == '?')
 	{
 		var_value = ft_itoa(exit_status);
@@ -79,12 +81,14 @@ char *expand_token(char *str, t_env *env_list, int exit_status)
 		free(var_name);
 		var_len = get_var_name_len(dollar_pos + 1);
 	}
+	
 	result = build_expanded_str(str, dollar_pos, var_value, var_len);
 	if (dollar_pos[1] == '?')
 		free(var_value);
-	return (result);
+	temp = expand_token(result, env_list, exit_status);
+	free(result);
+	return (temp);
 }
-
 
 char *build_expanded_str(char *str, char *dollar_pos, char *value, int var_len)
 {

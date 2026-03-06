@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/06 18:27:38 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/06 18:38:56 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_cmd
 	char	*infile;
 	char	*outfile;
 	int		append;
+	int		heredoc_fd;
 }	t_cmd;
 
 // FUNCTIONS
@@ -154,5 +155,9 @@ int		has_pipes(t_token *token_list);
 void setup_signals(void);
 void	handle_sigquit(int sig);
 void	handle_sigint(int sig);
+
+//Heredoc
+int	handle_heredoc(char *delimiter);
+int	extract_heredoc(t_token *token_list);
 
 #endif

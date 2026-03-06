@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+         #
+#    By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 18:14:51 by bfernan2          #+#    #+#              #
-#    Updated: 2026/03/02 19:28:52 by bfernan2         ###   ########.fr        #
+#    Updated: 2026/03/06 18:39:11 by malcosta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ builtin_cmds/execute_exit.c \
 builtin_cmds/execute_export.c \
 builtin_cmds/export_utils.c \
 parsing/parser.c \
+parsing/heredoc.c \
 parsing/extracting.c \
 parsing/build_args.c \
 parsing/pipeline_parsing.c \

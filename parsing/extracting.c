@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 20:31:57 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/28 14:26:09 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/06 20:11:29 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,27 @@ int	has_append_flag(t_token *token_list)
 		ptr = ptr->next;
 	}
 	return (0);
+}
+
+int extract_heredoc(t_token *token_list)
+{
+	t_token	*ptr;
+	char	*delimiter;
+	int		fd;
+
+	ptr = token_list;
+	while (ptr)
+	{
+		if (ft_str_equal(ptr->type, TYPE_HEREDOC))
+		{
+			if (ptr->next && ptr->next->value)
+			{
+				delimiter = ptr->next->value;
+				fd = handle_heredoc(delimiter);
+				return (fd);
+			}
+		}
+		ptr = ptr->next;
+	}
+	return (-1);
 }
