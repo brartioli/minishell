@@ -1,36 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_env.c                                      :+:      :+:    :+:   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/11 18:42:10 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/06 20:41:40 by malcosta         ###   ########.fr       */
+/*   Created: 2026/03/06 18:30:24 by malcosta          #+#    #+#             */
+/*   Updated: 2026/03/06 18:34:03 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_execute_env(t_mini *mini, t_cmd *cmd)
+int	handle_heredoc(char *delimiter)
 {
-	t_env	*tmp;
+	int		pipefd[2];
+	char	*line;
 
-	if (cmd->args[1])
+	if (pipe(pipefd) == -1)
 	{
-		ft_putstr_fd("env: '", 2);
-		ft_putstr_fd(cmd->args[1], 2);
-		ft_putendl_fd("': No such file or directory", 2);
-		return (127);
+		perror("pipe");
+		return (-1);
 	}
-	if (!mini || !mini->env_list)
-		return (0);
-	tmp = mini->env_list;
-	while (tmp)
+	while (1)
 	{
-		if (tmp->value)
-			ft_printf("%s=%s\n", tmp->name, tmp->value);
-		tmp = tmp->next;
+		line = readline("> ");
+		if (!line || ft_str_equal(line, delimiter))
+		{
+			free (line);
+			break ;
+		}
+		ft_putstr_fd(line, pipefd[1]);
+		ft_putstr_fd("\n", pipefd[1]);
+		free(line);
 	}
-	return (0);
+	close(pipefd[1]);
+	return (pipefd[0]);
 }

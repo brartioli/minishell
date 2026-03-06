@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/04 18:49:28 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/06 18:27:56 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ int	ft_is_builtin(char *cmd)
 		return (1);
 	if (ft_str_equal(cmd, "export"))
 		return (1);
+	if (ft_str_equal(cmd, "cd"))
+		return (1);
 	return (0);
 }
 
-void	ft_execute_command(t_mini *mini, t_cmd *cmd, char **envp)
+void	ft_execute_command(t_mini *mini, t_cmd *cmd)
 {
 	t_cmd	**cmds;
 	int		cmd_count;
@@ -40,7 +42,7 @@ void	ft_execute_command(t_mini *mini, t_cmd *cmd, char **envp)
 	{
 		cmds = parse_input(mini->token_list, mini->env_list, mini->exit_status);
 		cmd_count = count_commands(mini->token_list);
-		ft_execute_pipeline(cmds, cmd_count, envp);
+		ft_execute_pipeline(cmds, cmd_count, mini);
 		// TO DO: free_cmds(cmds, cmd_count)
 		return ;
 		
@@ -50,12 +52,12 @@ void	ft_execute_command(t_mini *mini, t_cmd *cmd, char **envp)
 	if (ft_is_builtin(cmd->args[0]))
 	{
 		if (has_redirect(cmd))
-			ft_execute_simple_command(cmd, envp, mini);
+			ft_execute_simple_command(cmd, mini);
 		else
 			mini->exit_status = ft_execute_builtin(mini, cmd);
 	}
 	else
-		ft_execute_simple_command(cmd, envp, mini);
+		ft_execute_simple_command(cmd, mini);
 }
 
 static void	handle_args(int ac, char **av)
@@ -92,7 +94,7 @@ int	main(int argc, char **argv, char **envp)
 		mini.token_list = NULL;
 		init_token_list(&mini.token_list, cmd_line); // TOKENIZA		
 		cmd = parse_command(mini.token_list, mini.env_list, mini.exit_status); // PARSEIA
-		ft_execute_command(&mini, cmd, envp); // EXECUTA
+		ft_execute_command(&mini, cmd); // EXECUTA
 		free_cmd(cmd); // IMPLEMENTAR - LIBERA CMD
 		free_token_list(mini.token_list); // LIBERA TOKENS
 		free(cmd_line);

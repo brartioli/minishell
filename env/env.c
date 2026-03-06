@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 14:02:53 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/27 17:30:13 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/06 20:47:27 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ t_env	*init_env(char **envp)
 		add_env_back(&env_new_list, new_node);
 		free(name_value);
 		i++;
-		}
+	}
 	return (env_new_list);
 }

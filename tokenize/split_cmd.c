@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 18:04:32 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/01 18:48:44 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/06 18:44:05 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,33 +47,6 @@ static int count_word(char *str)
 	return (count);
 }
 
-// static char *remove_quotes(char *str)
-// {
-// 	int		i;
-// 	int		j;
-// 	char	*result;
-// 	char	quote;
-
-// 	result = malloc(ft_strlen(str) + 1);
-// 	if (!result)
-// 		return (NULL);
-// 	i = 0;
-// 	j = 0;
-// 	quote = 0;
-// 	while (str[i])
-// 	{
-// 		if ((str[i] == '"' || str[i] == '\'') && !quote)
-// 			quote = str[i];
-// 		else if (str[i] == quote)
-// 			quote = 0;
-// 		else
-// 			result[j++] = str[i];
-// 		i++;
-// 	}
-// 	result[j] = '\0';
-// 	return (result);
-// }
-
 static char *extract_word(char *str, int *i)
 {
 	int		start;
@@ -82,6 +55,20 @@ static char *extract_word(char *str, int *i)
 
 	start = *i;
 	in_quotes = 0;
+	
+	// Se começa com operador (fora de aspas), extrai ele
+	if (str[*i] == '<' || str[*i] == '>' || str[*i] == '|')
+	{
+		if (str[*i] == '<' && str[*i + 1] == '<')
+			*i += 2;
+		else if (str[*i] == '>' && str[*i + 1] == '>')
+			*i += 2;
+		else
+			(*i)++;
+		return (ft_substr(str, start, *i - start));
+	}
+	
+	// Extrai palavra normal ou entre aspas
 	while (str[*i])
 	{
 		if ((str[*i] == '"' || str[*i] == '\'') && !in_quotes)
@@ -91,7 +78,8 @@ static char *extract_word(char *str, int *i)
 		}
 		else if (str[*i] == quote_char && in_quotes)
 			in_quotes = 0;
-		else if (str[*i] == ' ' && !in_quotes)
+		else if (!in_quotes && (str[*i] == ' ' || str[*i] == '<' || 
+				str[*i] == '>' || str[*i] == '|'))
 			break;
 		(*i)++;
 	}

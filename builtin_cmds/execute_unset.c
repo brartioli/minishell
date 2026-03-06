@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 15:08:03 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/02 18:41:51 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/03/06 20:43:58 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_execute_unset(t_mini *mini, t_cmd *cmd)
 		if (ft_strchr(cmd->args[i], '='))
 		{
 			i++;
-			continue;
+			continue ;
 		}
 		remove_env_node (&mini->env_list, cmd->args[i]);
 		i++;

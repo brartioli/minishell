@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 18:37:16 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/01 18:52:26 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/06 20:27:01 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,20 @@ t_cmd **parse_input(t_token *token_list, t_env *env_list, int exit_status)
 
 t_cmd *parse_command(t_token *token_list, t_env *env_list, int exit_status)
 {
-    t_cmd *cmd;
-    
-    cmd = init_command();
+	t_cmd *cmd;
+
+	cmd = init_command();
 	if (!cmd)
 		return (NULL);
-    expand_variables(token_list, env_list, exit_status);
+
+	expand_variables(token_list, env_list, exit_status);
 	process_quotes(token_list);
-    cmd->infile = extract_infile(token_list);
-    cmd->outfile = extract_outfile(token_list);
-    cmd->append = has_append_flag(token_list);
-    cmd->args = build_args(token_list);
-    
-    return (cmd);
+	cmd->heredoc_fd = extract_heredoc(token_list);  // ← ADICIONA ISSO!
+	cmd->infile = extract_infile(token_list);
+	cmd->outfile = extract_outfile(token_list);
+	cmd->append = has_append_flag(token_list);
+	cmd->args = build_args(token_list);
+	return (cmd);
 }
 
 
@@ -64,6 +65,7 @@ t_cmd	*init_command(void)
 	cmd->infile = NULL;
 	cmd->outfile = NULL;
 	cmd->append = 0;
+	cmd->heredoc_fd = -1;
 	return (cmd);
 }
 
