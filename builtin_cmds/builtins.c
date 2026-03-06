@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 19:26:51 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/02 20:22:21 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/03/06 16:07:39 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	ft_execute_builtin(t_mini *mini, t_cmd *cmd)
 		return (ft_execute_unset(mini, cmd));
 	else if (ft_str_equal(cmd_name, "export"))
 		return (ft_execute_export(mini, cmd));
+	else if (ft_str_equal(cmd_name, "cd"))
+		return (ft_execute_cd(mini, cmd));
 	else
 		return (ft_execute_cd(mini, cmd));
 	return (1);

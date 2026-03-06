@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/04 18:49:28 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/06 16:08:07 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	ft_is_builtin(char *cmd)
 	if (ft_str_equal(cmd, "exit"))
 		return (1);
 	if (ft_str_equal(cmd, "export"))
+		return (1);
+	if (ft_str_equal(cmd, "cd"))
 		return (1);
 	return (0);
 }

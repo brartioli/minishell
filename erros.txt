@@ -1,10 +1,6 @@
 
 ERROS E COISAS PARA CONFERIR (RÉGUA)
 
-11. cd
-
-12. pwd
-
 14. environment path
 dar unset no PATH - COMANDOS CONTINUAM FUNCIONANDO
 
