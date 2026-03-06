@@ -1,14 +1,7 @@
 
 ERROS E COISAS PARA CONFERIR (RÉGUA)
 
-14. environment path
-dar unset no PATH - COMANDOS CONTINUAM FUNCIONANDO
-
 15. redirect e heredoc
-
-16. pipes
-
-17. seja louco e historico
 
 18. variaveis de ambiente
 

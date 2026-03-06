@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/06 16:08:34 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/06 18:27:38 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_cmd
 // FUNCTIONS
 
 //Main
-void	ft_execute_command(t_mini *mini, t_cmd *cmd, char **envp);
+void	ft_execute_command(t_mini *mini, t_cmd *cmd);
 int		ft_is_builtin(char *cmd);
 
 // Tokenize
@@ -101,6 +101,8 @@ int		has_append_flag(t_token *token_list);
 t_env	*init_env(char **envp);
 void	add_env_back(t_env **env_list, t_env *new_env);
 t_env	*create_env_node(char *name, char *value);
+char	**env_list_to_array(t_env *env_list);
+void	free_array(char **array);
 
 //Builtin
 int		ft_execute_builtin(t_mini *mini, t_cmd *cmd);
@@ -125,7 +127,7 @@ int is_valid_number(char *str);
 
 //Path execution
 void	ft_exec(t_cmd *cmd, char **envp);
-void	ft_execute_simple_command(t_cmd *cmd, char **envp, t_mini *mini);
+void	ft_execute_simple_command(t_cmd *cmd, t_mini *mini);
 char	*get_path_from_env(char **env);
 char	*get_full_path(char *cmd, char **envp);
 void	apply_redirects(t_cmd *cmd);
@@ -138,7 +140,7 @@ char	**build_args(t_token *start);
 void	free_args(char **args);
 
 //Pipeline execution
-void	ft_execute_pipeline(t_cmd **cmds, int cmds_quant, char **envp);
+void ft_execute_pipeline(t_cmd **cmds, int cmds_quant, t_mini *mini);
 void	close_all_pipes(int **pipes, int cmds_quant);
 void	wait_all_children(pid_t *pids, int cmds_quant);
 

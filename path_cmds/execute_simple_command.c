@@ -6,26 +6,29 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 19:04:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/02 19:25:26 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/06 16:24:00 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_execute_simple_command(t_cmd *cmd, char **envp, t_mini *mini)
+void	ft_execute_simple_command(t_cmd *cmd, t_mini *mini)
 {
 	pid_t		pid;
 	int			exit_status;
 	extern int	g_in_command;
+	char		**new_envp;
 
 	if (!cmd || !cmd->args || !cmd->args[0])
 		return ;
+	new_envp = env_list_to_array(mini->env_list);
 	g_in_command = 1;
 	pid = fork();
 	if (pid < 0)
 	{
 		perror("fork");
 		g_in_command = 0;
+		free_array(new_envp);
 		return ;
 	}
 	else if (pid == 0)
@@ -36,7 +39,7 @@ void	ft_execute_simple_command(t_cmd *cmd, char **envp, t_mini *mini)
 		if (ft_is_builtin(cmd->args[0]))
 			exit(ft_execute_builtin(mini, cmd));
 		else
-			ft_exec(cmd, envp);
+			ft_exec(cmd, new_envp);
 	}
 	else
 	{
@@ -47,4 +50,5 @@ void	ft_execute_simple_command(t_cmd *cmd, char **envp, t_mini *mini)
 			mini->exit_status = 128 + WTERMSIG(exit_status);
 	g_in_command = 0;
 	}
+	free_array(new_envp);
 }

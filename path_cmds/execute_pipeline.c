@@ -6,18 +6,22 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 12:03:31 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/28 11:58:28 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/06 18:25:54 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_execute_pipeline(t_cmd **cmds, int cmds_quant, char **envp)
+void	ft_execute_pipeline(t_cmd **cmds, int cmds_quant, t_mini *mini)
 {
-	int		**pipes;
-	pid_t	*pids;
-	int		i;
+	int			**pipes;
+	pid_t		*pids;
+	int			i;
+	char		**new_envp;
+	extern int	g_in_command;
 
+	g_in_command = 1;
+	new_envp = env_list_to_array(mini->env_list);
 	pipes = create_pipes(cmds_quant);
 	if (!pipes)
 		return ;
@@ -36,12 +40,14 @@ void	ft_execute_pipeline(t_cmd **cmds, int cmds_quant, char **envp)
 				dup2(pipes[i][1], STDOUT_FILENO);
 			close_all_pipes(pipes, cmds_quant);
 			apply_redirects(cmds[i]);
-			ft_exec(cmds[i], envp);
+			ft_exec(cmds[i], new_envp);
 		}
 		i++;
 	}
 	close_all_pipes(pipes, cmds_quant);
 	wait_all_children(pids, cmds_quant);
+	free_array(new_envp);
+	g_in_command = 0;
 }
 
 void	close_all_pipes(int **pipes, int cmds_quant)
