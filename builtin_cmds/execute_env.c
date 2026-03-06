@@ -6,13 +6,13 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 18:42:10 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/27 16:07:33 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/06 20:41:40 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_execute_env(t_mini *mini, t_cmd *cmd)
+int	ft_execute_env(t_mini *mini, t_cmd *cmd)
 {
 	t_env	*tmp;
 

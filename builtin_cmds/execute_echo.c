@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 20:43:06 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/28 14:30:09 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/06 20:41:17 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,13 @@ static int	is_n_flag(char *arg)
 	return (1);
 }
 
-int	ft_execute_echo(t_mini *mini, t_cmd *cmd)
+int	ft_execute_echo(t_cmd *cmd)
 {
 	int	i;
 	int	newline;
-	(void)mini;
 
 	i = 1;
 	newline = 1;
-
 	while (cmd->args[i] && is_n_flag(cmd->args[i]))
 	{
 		newline = 0;
@@ -47,7 +45,7 @@ int	ft_execute_echo(t_mini *mini, t_cmd *cmd)
 	while (cmd->args[i])
 	{
 		ft_putstr_fd(cmd->args[i], 1);
-		if(cmd->args[i + 1])
+		if (cmd->args[i + 1])
 			ft_putstr_fd(" ", 1);
 		i++;
 	}

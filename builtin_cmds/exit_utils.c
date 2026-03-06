@@ -6,15 +6,15 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 13:49:24 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/27 17:27:40 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/06 20:44:21 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int is_valid_number(char *str)
+int	is_valid_number(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str || !str[0])

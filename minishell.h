@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/06 18:38:56 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/06 20:40:03 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int		ft_execute_builtin(t_mini *mini, t_cmd *cmd);
 int		ft_execute_pwd(void);
 int		ft_execute_env(t_mini *mini, t_cmd *cmd);
 int		ft_execute_exit(t_mini	*mini);
-int		ft_execute_echo(t_mini *mini, t_cmd *cmd);
+int		ft_execute_echo(t_cmd *cmd);
 int		ft_execute_unset(t_mini *mini, t_cmd *cmd);
 int		ft_execute_export(t_mini *mini, t_cmd *cmd);
 int		ft_execute_export(t_mini *mini, t_cmd *cmd);
@@ -121,6 +121,7 @@ int		is_valid_identifier(char *name);
 void	add_or_update_env(t_mini *mini, char *name, char *value);
 int		ft_execute_cd(t_mini *mini, t_cmd *cmd);
 void	update_pwd(t_mini *mini);
+char	*get_cd_path(t_mini *mini, t_cmd *cmd);
 
 
 //Utils Builtin

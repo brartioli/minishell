@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execute_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 19:27:42 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/11 20:02:28 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/03/06 20:42:03 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_execute_exit(t_mini	*mini)
+int	ft_execute_exit(t_mini	*mini)
 {
 	int		count_args;
 	t_token	*current;
@@ -21,7 +21,7 @@ int ft_execute_exit(t_mini	*mini)
 	ft_printf("exit\n");
 	count_args = 0;
 	current = mini->token_list->next;
-	while (current && ++count_args) 
+	while (current && ++count_args)
 		current = current->next;
 	if (count_args == 0)
 		exit (mini->exit_status);

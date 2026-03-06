@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 18:29:46 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/02 18:46:08 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/06 20:42:21 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	process_export_arg(t_mini *mini, char *arg)
 	char	*value;
 
 	split_var_value(arg, &name, &value);
-
 	if (!is_valid_identifier(name))
 	{
 		ft_printf("export: `%s': not a valid identifier\n", arg);
