@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 20:43:06 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/02/28 14:30:09 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/12 18:43:04 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_execute_echo(t_mini *mini, t_cmd *cmd)
 {
 	int	i;
 	int	newline;
-	(void)mini;
+	(void)mini;t 
 
 	i = 1;
 	newline = 1;

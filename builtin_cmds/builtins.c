@@ -6,7 +6,7 @@
 /*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 19:26:51 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/02 20:22:21 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/03/12 18:33:49 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_execute_builtin(t_mini *mini, t_cmd *cmd)
 {
 	char	*cmd_name;
-	
+
 	if (!cmd || !cmd->args || !cmd->args[0])
 		return (1);
 	cmd_name = cmd->args[0];

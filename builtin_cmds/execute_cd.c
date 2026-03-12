@@ -6,7 +6,7 @@
 /*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 19:23:21 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/02 20:56:34 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/03/12 18:40:47 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_execute_cd(t_mini *mini, t_cmd *cmd)
 	{
 		ft_putstr_fd("minishell: cd: ", 2);
 		perror(path);
-		return(1);
+		return (1);
 	}
 	update_pwd(mini);
 	return (0);
