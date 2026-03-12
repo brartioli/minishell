@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 17:22:38 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/06 20:27:17 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/12 19:39:40 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void apply_redirects(t_cmd *cmd)
+void	apply_redirects(t_cmd *cmd)
 {
-	int fd;
+	int	fd;
 
 	if (!cmd)
-		return;
+		return ;
 	if (cmd->heredoc_fd != -1)
 	{
 		if (dup2(cmd->heredoc_fd, 0) == -1)

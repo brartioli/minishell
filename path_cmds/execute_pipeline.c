@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execute_pipeline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 12:03:31 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/06 20:27:41 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/12 19:32:46 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_execute_pipeline(t_cmd **cmds, int cmds_quant, t_mini *mini)
+void	ft_execute_pipeline(t_cmd **cmds, int cmds_quant, t_mini *mini)
 {
 	int			**pipes;
 	pid_t		*pids;
@@ -24,10 +24,10 @@ void ft_execute_pipeline(t_cmd **cmds, int cmds_quant, t_mini *mini)
 	new_envp = env_list_to_array(mini->env_list);
 	pipes = create_pipes(cmds_quant);
 	if (!pipes)
-		return;
+		return ;
 	pids = malloc(sizeof(pid_t) * cmds_quant);
 	if (!pids)
-		return;
+		return ;
 	i = 0;
 	while (i < cmds_quant)
 	{
