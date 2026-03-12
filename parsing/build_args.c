@@ -6,13 +6,26 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 11:14:51 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/06 19:57:26 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/12 19:21:48 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int count_args(t_token *start)
+static int	is_redirect_type(char *type)
+{
+	if (ft_str_equal(type, TYPE_REDIR_IN))
+		return (1);
+	if (ft_str_equal(type, TYPE_REDIR_OUT))
+		return (1);
+	if (ft_str_equal(type, TYPE_REDIR_APPEND))
+		return (1);
+	if (ft_str_equal(type, TYPE_HEREDOC))
+		return (1);
+	return (0);
+}
+
+int	count_args(t_token *start)
 {
 	t_token	*current;
 	int		count;
@@ -23,25 +36,22 @@ int count_args(t_token *start)
 	{
 		if (ft_str_equal(current->type, TYPE_WORD))
 			count++;
-		else if (ft_str_equal(current->type, TYPE_REDIR_IN) ||
-				ft_str_equal(current->type, TYPE_REDIR_OUT) ||
-				ft_str_equal(current->type, TYPE_REDIR_APPEND) ||
-				ft_str_equal(current->type, TYPE_HEREDOC))
+		else if (is_redirect_type(current->type))
 			current = current->next;
 		current = current->next;
 	}
 	return (count);
 }
 
-char **allocate_args(int count)
+char	**allocate_args(int count)
 {
-	char **args;
+	char	**args;
 
 	args = malloc(sizeof(char *) * (count + 1));
 	return (args);
 }
 
-int fill_args(char **args, t_token *start)
+int	fill_args(char **args, t_token *start)
 {
 	t_token	*current;
 	int		i;
@@ -61,10 +71,7 @@ int fill_args(char **args, t_token *start)
 			}
 			i++;
 		}
-		else if (ft_str_equal(current->type, TYPE_REDIR_IN) ||
-				ft_str_equal(current->type, TYPE_REDIR_OUT) ||
-				ft_str_equal(current->type, TYPE_REDIR_APPEND) ||
-				ft_str_equal(current->type, TYPE_HEREDOC))
+		else if (is_redirect_type(current->type))
 			current = current->next;
 		current = current->next;
 	}
@@ -72,10 +79,10 @@ int fill_args(char **args, t_token *start)
 	return (0);
 }
 
-char **build_args(t_token *token_list)
+char	**build_args(t_token *token_list)
 {
-	char **args;
-	int count;
+	char	**args;
+	int		count;
 
 	count = count_args(token_list);
 	if (count == 0)
@@ -89,19 +96,4 @@ char **build_args(t_token *token_list)
 		return (NULL);
 	}
 	return (args);
-}
-
-void free_args(char **args)
-{
-	int i;
-
-	if (!args)
-		return;
-	i = 0;
-	while (args[i])
-	{
-		free(args[i]);
-		i++;
-	}
-	free(args);
 }

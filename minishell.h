@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/06 20:40:03 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/12 18:54:16 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,21 +77,20 @@ void	free_token_list(t_token *token_list);
 char	**split_cmd(char *str);
 
 // Parsing
-t_cmd **parse_input(t_token *token_list, t_env *env_list, int exit_status);
-t_cmd *parse_command(t_token *token_list, t_env *env_list, int exit_status);
+t_cmd	**parse_input(t_token *token_list, t_env *env_list, int exit_status);
+t_cmd	*parse_command(t_token *token_list, t_env *env_list, int exit_status);
 void	process_quotes(t_token *token_list);
 t_cmd	*init_command(void);
 void	free_cmd(t_cmd *cmd);
 int		has_redirect(t_cmd *cmd);
 
 //Expand variables
-int 	get_var_name_len(char *var_name);
+int		get_var_name_len(char *var_name);
 char	*extract_var_name(char *start);
-char *build_expanded_str(char *str, char *dollar_pos, char *value, int var_len);
-char *expand_token(char *str, t_env *env_list, int exit_status);
+char	*build_expanded_str(char *str, char *dol_pos, char *value, int var_len);
+char	*expand_token(char *str, t_env *env_list, int exit_status);
 char	*get_env_value(t_env *env_list, char *var_name);
-void expand_variables(t_token *token_list, t_env *env_list, int exit_status);
-
+void	expand_variables(t_token *token_list, t_env *env_list, int exit_status);
 
 // Extracting
 char	*extract_infile(t_token *token_list);
@@ -123,9 +122,8 @@ int		ft_execute_cd(t_mini *mini, t_cmd *cmd);
 void	update_pwd(t_mini *mini);
 char	*get_cd_path(t_mini *mini, t_cmd *cmd);
 
-
 //Utils Builtin
-int is_valid_number(char *str);
+int		is_valid_number(char *str);
 
 //Path execution
 void	ft_exec(t_cmd *cmd, char **envp);
@@ -142,7 +140,7 @@ char	**build_args(t_token *start);
 void	free_args(char **args);
 
 //Pipeline execution
-void ft_execute_pipeline(t_cmd **cmds, int cmds_quant, t_mini *mini);
+void	ft_execute_pipeline(t_cmd **cmds, int cmds_quant, t_mini *mini);
 void	close_all_pipes(int **pipes, int cmds_quant);
 void	wait_all_children(pid_t *pids, int cmds_quant);
 
@@ -153,12 +151,12 @@ int		**create_pipes(int cmds_quant);
 int		has_pipes(t_token *token_list);
 
 //Signals
-void setup_signals(void);
+void	setup_signals(void);
 void	handle_sigquit(int sig);
 void	handle_sigint(int sig);
 
 //Heredoc
-int	handle_heredoc(char *delimiter);
-int	extract_heredoc(t_token *token_list);
+int		handle_heredoc(char *delimiter);
+int		extract_heredoc(t_token *token_list);
 
 #endif

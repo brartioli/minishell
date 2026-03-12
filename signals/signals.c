@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 18:58:33 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/01 20:09:09 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/12 18:54:43 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	handle_sigquit(int sig)
 	(void)sig;
 }
 
-void setup_signals(void)
+void	setup_signals(void)
 {
 	signal(SIGINT, handle_sigint);
 }
