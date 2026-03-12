@@ -6,7 +6,7 @@
 #    By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 18:14:51 by bfernan2          #+#    #+#              #
-#    Updated: 2026/03/06 18:39:11 by malcosta         ###   ########.fr        #
+#    Updated: 2026/03/12 19:20:48 by malcosta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ parsing/pipeline_parsing.c \
 parsing/expand.c \
 parsing/expand_utils.c \
 parsing/process_quotes.c \
+parsing/build_args_utils.c \
 builtin_cmds/execute_echo.c\
 builtin_cmds/execute_unset.c\
 builtin_cmds/execute_cd.c\

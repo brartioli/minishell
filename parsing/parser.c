@@ -6,13 +6,13 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 18:37:16 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/06 20:27:01 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/12 19:37:11 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmd **parse_input(t_token *token_list, t_env *env_list, int exit_status)
+t_cmd	**parse_input(t_token *token_list, t_env *env_list, int exit_status)
 {
 	t_cmd	**cmds;
 	t_token	**token_groups;
@@ -35,24 +35,22 @@ t_cmd **parse_input(t_token *token_list, t_env *env_list, int exit_status)
 	return (cmds);
 }
 
-t_cmd *parse_command(t_token *token_list, t_env *env_list, int exit_status)
+t_cmd	*parse_command(t_token *token_list, t_env *env_list, int exit_status)
 {
-	t_cmd *cmd;
+	t_cmd	*cmd;
 
 	cmd = init_command();
 	if (!cmd)
 		return (NULL);
-
 	expand_variables(token_list, env_list, exit_status);
 	process_quotes(token_list);
-	cmd->heredoc_fd = extract_heredoc(token_list);  // ← ADICIONA ISSO!
+	cmd->heredoc_fd = extract_heredoc(token_list);
 	cmd->infile = extract_infile(token_list);
 	cmd->outfile = extract_outfile(token_list);
 	cmd->append = has_append_flag(token_list);
 	cmd->args = build_args(token_list);
 	return (cmd);
 }
-
 
 t_cmd	*init_command(void)
 {
@@ -96,7 +94,6 @@ int	has_redirect(t_cmd *cmd)
 {
 	if (!cmd)
 		return (0);
-
 	if (cmd->infile || cmd->outfile)
 		return (1);
 	return (0);
