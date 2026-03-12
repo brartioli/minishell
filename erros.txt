@@ -11,3 +11,5 @@ minishell> cat << EOF | grep test
 
 21. readme
 
+22. main.c - ft_execute_command
+// TO DO: free_cmds(cmds, cmd_count)
