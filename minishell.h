@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/12 18:54:16 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/12 21:04:47 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ void	free_args(char **args);
 void	ft_execute_pipeline(t_cmd **cmds, int cmds_quant, t_mini *mini);
 void	close_all_pipes(int **pipes, int cmds_quant);
 void	wait_all_children(pid_t *pids, int cmds_quant);
+void	free_pipes(int **pipes, int cmds_quant);
 
 //Pipeline parsing utils
 int		count_commands(t_token *token_list);
