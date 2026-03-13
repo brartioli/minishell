@@ -3,22 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 18:41:43 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/04 14:54:14 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/12 21:11:59 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static char	*search_in_paths(char **split_path, char *cmd)
+{
+	char	*full_path;
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	while (split_path[i])
+	{
+		tmp = ft_strjoin(split_path[i], "/");
+		full_path = ft_strjoin(tmp, cmd);
+		free(tmp);
+		if (access(full_path, X_OK) == 0)
+		{
+			ft_free_split(split_path);
+			return (full_path);
+		}
+		free(full_path);
+		i++;
+	}
+	ft_free_split(split_path);
+	return (NULL);
+}
+
 char	*get_full_path(char *cmd, char **env)
 {
 	char	*path;
 	char	**split_path;
-	char	*full_path;
-	char	*tmp;
-	int		i;
 
 	if (!cmd)
 		return (NULL);
@@ -34,22 +55,8 @@ char	*get_full_path(char *cmd, char **env)
 	split_path = ft_split(path, ':');
 	if (!split_path)
 		return (NULL);
-	i = 0;
-	while (split_path[i])
-	{
-		tmp = ft_strjoin(split_path[i], "/");
-		full_path = ft_strjoin(tmp, cmd);
-		free(tmp);
-		if (access(full_path, X_OK) == 0)
-		{
-			ft_free_split(split_path);
-			return (full_path);
-		}	
-		free(full_path);
-		i++;
-	}
+	return (search_in_paths(split_path, cmd));
 	ft_free_split(split_path);
-	return (NULL);
 }
 
 char	*get_path_from_env(char **env)
