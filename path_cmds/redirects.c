@@ -6,11 +6,28 @@
 /*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 17:22:38 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/12 19:39:40 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/03/12 21:05:13 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	handle_outfile(t_cmd *cmd)
+{
+	int	fd;
+
+	if (cmd->append)
+		fd = open(cmd->outfile, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	else
+		fd = open(cmd->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd < 0)
+	{
+		perror(cmd->outfile);
+		exit(1);
+	}
+	dup2(fd, 1);
+	close(fd);
+}
 
 void	apply_redirects(t_cmd *cmd)
 {
@@ -36,17 +53,5 @@ void	apply_redirects(t_cmd *cmd)
 		close(fd);
 	}
 	if (cmd->outfile)
-	{
-		if (cmd->append)
-			fd = open(cmd->outfile, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		else
-			fd = open(cmd->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (fd < 0)
-		{
-			perror(cmd->outfile);
-			exit(1);
-		}
-		dup2(fd, 1);
-		close(fd);
-	}
+		handle_outfile(cmd);
 }
