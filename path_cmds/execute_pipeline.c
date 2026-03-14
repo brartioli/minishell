@@ -6,7 +6,7 @@
 /*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 12:03:31 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/12 19:32:46 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/03/14 12:43:16 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ void	ft_execute_pipeline(t_cmd **cmds, int cmds_quant, t_mini *mini)
 		return ;
 	pids = malloc(sizeof(pid_t) * cmds_quant);
 	if (!pids)
-		return ;
+	{
+		free_pipes(pipes, cmds_quant);
+		free_array(new_envp);
+		return ;		
+	}
 	i = 0;
 	while (i < cmds_quant)
 	{
@@ -74,3 +78,17 @@ void	wait_all_children(pid_t *pids, int cmds_quant)
 		i++;
 	}
 }
+
+void	free_pipes(int **pipes, int cmds_quant)
+{
+	int	i;
+
+	i = 0;
+	while(i < cmds_quant - 1)
+	{
+		free(pipes[i]);
+		i++;
+	}
+	free(pipes);
+}
+

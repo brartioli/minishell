@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 18:37:16 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/12 19:37:11 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/14 12:41:26 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ t_cmd	**parse_input(t_token *token_list, t_env *env_list, int exit_status)
 	token_groups = split_commands_by_pipe(token_list, cmd_count);
 	cmds = malloc(sizeof(t_cmd *) * (cmd_count + 1));
 	if (!cmds)
+	{
+		free(token_groups);
 		return (NULL);
+	}
 	i = 0;
 	while (i < cmd_count)
 	{

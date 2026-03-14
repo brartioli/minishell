@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline_parsing.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 18:54:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/02/28 12:22:00 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/14 12:42:54 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	**create_pipes(int cmds_quant)
 		if (pipe(pipes[i]) == -1)
 		{
 			perror("pipe");
+			free_pipes(pipes, i);
 			return (NULL);
 		}
 		i++;

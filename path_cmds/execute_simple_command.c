@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_simple_command.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 19:04:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/06 16:24:00 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/14 12:51:30 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ void	ft_execute_simple_command(t_cmd *cmd, t_mini *mini)
 		signal(SIGQUIT, SIG_DFL);
 		apply_redirects(cmd);
 		if (ft_is_builtin(cmd->args[0]))
+		{
+			free_array(new_envp);
 			exit(ft_execute_builtin(mini, cmd));
+		}
 		else
 			ft_exec(cmd, new_envp);
 	}

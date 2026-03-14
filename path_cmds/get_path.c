@@ -6,7 +6,7 @@
 /*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 18:41:43 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/12 21:11:59 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/03/14 12:38:40 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ char	*get_full_path(char *cmd, char **env)
 	if (!split_path)
 		return (NULL);
 	return (search_in_paths(split_path, cmd));
-	ft_free_split(split_path);
 }
 
 char	*get_path_from_env(char **env)
