@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 12:03:31 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/12 21:05:29 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/14 12:43:16 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,14 @@ void	ft_execute_pipeline(t_cmd **cmds, int cmds_quant, t_mini *mini)
 	new_envp = env_list_to_array(mini->env_list);
 	pipes = create_pipes(cmds_quant);
 	pids = malloc(sizeof(pid_t) * cmds_quant);
-	i = -1;
-	while (++i < cmds_quant)
+	if (!pids)
+	{
+		free_pipes(pipes, cmds_quant);
+		free_array(new_envp);
+		return ;		
+	}
+	i = 0;
+	while (i < cmds_quant)
 	{
 		pids[i] = fork();
 		if (pids[i] == 0)
@@ -57,3 +63,42 @@ void	ft_execute_pipeline(t_cmd **cmds, int cmds_quant, t_mini *mini)
 	cleanup_pipeline(pipes, pids, cmds_quant, new_envp);
 	g_in_command = 0;
 }
+
+void	close_all_pipes(int **pipes, int cmds_quant)
+{
+	int	i;
+
+	i = 0;
+	while (i < cmds_quant - 1)
+	{
+		close(pipes[i][0]);
+		close(pipes[i][1]);
+		i++;
+	}
+}
+
+void	wait_all_children(pid_t *pids, int cmds_quant)
+{
+	int	i;
+
+	i = 0;
+	while (i < cmds_quant)
+	{
+		waitpid(pids[i], NULL, 0);
+		i++;
+	}
+}
+
+void	free_pipes(int **pipes, int cmds_quant)
+{
+	int	i;
+
+	i = 0;
+	while(i < cmds_quant - 1)
+	{
+		free(pipes[i]);
+		i++;
+	}
+	free(pipes);
+}
+

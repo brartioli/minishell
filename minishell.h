@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/14 12:49:13 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/14 12:43:40 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ int		count_commands(t_token *token_list);
 t_token	**split_commands_by_pipe(t_token *token_list, int cmds_quant);
 int		**create_pipes(int cmds_quant);
 int		has_pipes(t_token *token_list);
+void	free_pipes(int **pipes, int cmds_quant);
 
 //Signals
 void	setup_signals(void);
