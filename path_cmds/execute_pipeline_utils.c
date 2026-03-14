@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 21:04:17 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/12 21:10:22 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/14 13:10:09 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,27 @@ void	free_pipes(int **pipes, int cmds_quant)
 	int	i;
 
 	i = 0;
+	if (!pipes)
+		return ;
 	while (i < cmds_quant - 1)
 	{
 		free(pipes[i]);
 		i++;
 	}
 	free(pipes);
+}
+
+void	free_cmds_array(t_cmd **cmds, int cmd_count)
+{
+	int	i;
+
+	if (!cmds)
+		return ;
+	i = 0;
+	while (i < cmd_count)
+	{
+		free_cmd(cmds[i]);
+		i++;
+	}
+	free(cmds);
 }
