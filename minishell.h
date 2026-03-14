@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/12 21:04:47 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/14 12:49:13 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	add_env_back(t_env **env_list, t_env *new_env);
 t_env	*create_env_node(char *name, char *value);
 char	**env_list_to_array(t_env *env_list);
 void	free_array(char **array);
+void	free_env_list(t_env *env_list);
 
 //Builtin
 int		ft_execute_builtin(t_mini *mini, t_cmd *cmd);

@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 14:02:53 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/06 20:47:27 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/14 12:50:48 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,30 @@ t_env	*init_env(char **envp)
 	{
 		name_value = ft_split(envp[i], '=');
 		if (!name_value)
-			return (NULL);
+			return (free_env_list(env_new_list), NULL);
 		new_node = create_env_node(name_value[0], name_value[1]);
 		if (!new_node)
 		{
 			ft_free_split(name_value);
-			return (NULL);
+			return (free_env_list(env_new_list), NULL);
 		}
 		add_env_back(&env_new_list, new_node);
 		free(name_value);
 		i++;
 	}
 	return (env_new_list);
+}
+
+void	free_env_list(t_env *env_list)
+{
+	t_env	*tmp;
+
+	while (env_list)
+	{
+		tmp = env_list;
+		env_list = env_list->next;
+		free(tmp->name);
+		free(tmp->value);
+		free(tmp);
+	}
 }
