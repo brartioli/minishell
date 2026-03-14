@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 14:18:34 by malcosta          #+#    #+#             */
-/*   Updated: 2026/01/20 20:06:42 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/14 16:03:35 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_token	*create_token(char *value, char *type)
 	if (!token)
 		return (NULL);
 	token->value = ft_strdup(value);
-	token->type = ft_strdup(type);
+	token->type = type;
 	token->next = NULL;
 	token->prev = NULL;
 	return (token);
@@ -63,7 +63,6 @@ void	free_token_list(t_token *token_list)
 		tmp = token_list;
 		token_list = token_list->next;
 		free(tmp->value);
-		free(tmp->type);
 		free(tmp);
 	}
 }

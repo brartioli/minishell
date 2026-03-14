@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:43:53 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/14 12:40:39 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/14 16:20:43 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,11 @@ t_env	*create_env_node(char *name, char *value)
 	new_node = malloc(sizeof(t_env));
 	if (!new_node)
 		return (NULL);
-	new_node->name = name;
-	new_node->value = value;
+	new_node->name = ft_strdup(name);
+	if (value)
+		new_node->value = ft_strdup(value);
+	else
+		new_node->value = NULL;
 	new_node->next = NULL;
 	return (new_node);
 }

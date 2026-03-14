@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+         #
+#    By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 18:14:51 by bfernan2          #+#    #+#              #
-#    Updated: 2026/03/12 21:06:42 by malcosta         ###   ########.fr        #
+#    Updated: 2026/03/14 16:46:03 by bfernan2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,15 @@ MAKEFLAGS += --silent
 
 NAME = minishell
 
-SRC = main.c tokenize/token_utils.c tokenize/tokenize.c tokenize/split_cmd.c\
+VALGRIND = valgrind -s -q \
+			--track-origins=yes \
+			--show-leak-kinds=all \
+			--track-fds=yes \
+			--suppressions=readline.supp \
+			--leak-check=full
+
+SRC = main.c clean.c \
+tokenize/token_utils.c tokenize/tokenize.c tokenize/split_cmd.c\
 env/env.c env/env_utils.c \
 path_cmds/exec.c \
 path_cmds/execute_simple_command.c \
@@ -65,10 +73,22 @@ clean:
 	@rm -f $(OBJ)
 	@$(MAKE) -s -C $(LIBFT_DIR) clean
 
+readline.supp:
+	@echo "{" > readline.supp
+	@echo "   ignore_libreadline" >> readline.supp
+	@echo "   Memcheck:Leak" >> readline.supp
+	@echo "   ..." >> readline.supp
+	@echo "   obj:*/libreadline.so.*" >> readline.supp
+	@echo "}" >> readline.supp
+
+leaks: readline.supp $(NAME)
+	@$(VALGRIND) ./$(NAME)
+
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f readline.supp
 	@$(MAKE) -s -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re leaks
