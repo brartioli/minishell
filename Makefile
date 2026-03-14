@@ -6,7 +6,7 @@
 #    By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 18:14:51 by bfernan2          #+#    #+#              #
-#    Updated: 2026/03/12 19:20:48 by malcosta         ###   ########.fr        #
+#    Updated: 2026/03/12 21:06:42 by malcosta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ env/env.c env/env_utils.c \
 path_cmds/exec.c \
 path_cmds/execute_simple_command.c \
 path_cmds/execute_pipeline.c \
+path_cmds/execute_pipeline_utils.c \
 path_cmds/get_path.c \
 path_cmds/redirects.c \
 builtin_cmds/builtins.c \

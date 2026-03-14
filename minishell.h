@@ -103,6 +103,7 @@ void	add_env_back(t_env **env_list, t_env *new_env);
 t_env	*create_env_node(char *name, char *value);
 char	**env_list_to_array(t_env *env_list);
 void	free_array(char **array);
+void	free_env_list(t_env *env_list);
 
 //Builtin
 int		ft_execute_builtin(t_mini *mini, t_cmd *cmd);
@@ -143,6 +144,7 @@ void	free_args(char **args);
 void	ft_execute_pipeline(t_cmd **cmds, int cmds_quant, t_mini *mini);
 void	close_all_pipes(int **pipes, int cmds_quant);
 void	wait_all_children(pid_t *pids, int cmds_quant);
+void	free_pipes(int **pipes, int cmds_quant);
 
 //Pipeline parsing utils
 int		count_commands(t_token *token_list);

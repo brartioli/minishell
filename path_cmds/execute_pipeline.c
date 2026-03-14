@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   execute_pipeline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 12:03:31 by malcosta          #+#    #+#             */
 /*   Updated: 2026/03/14 12:43:16 by bfernan2         ###   ########.fr       */
@@ -11,6 +11,25 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	setup_child_pipes(int **pipes, int i, int cmds_quant)
+{
+	if (i > 0)
+		dup2(pipes[i - 1][0], STDIN_FILENO);
+	if (i < cmds_quant - 1)
+		dup2(pipes[i][1], STDOUT_FILENO);
+	close_all_pipes(pipes, cmds_quant);
+}
+
+static void	cleanup_pipeline(int **pipes, pid_t *pids,
+	int cmds_quant, char **new_envp)
+{
+	close_all_pipes(pipes, cmds_quant);
+	wait_all_children(pids, cmds_quant);
+	free_pipes(pipes, cmds_quant);
+	free(pids);
+	free_array(new_envp);
+}
 
 void	ft_execute_pipeline(t_cmd **cmds, int cmds_quant, t_mini *mini)
 {
@@ -23,8 +42,6 @@ void	ft_execute_pipeline(t_cmd **cmds, int cmds_quant, t_mini *mini)
 	g_in_command = 1;
 	new_envp = env_list_to_array(mini->env_list);
 	pipes = create_pipes(cmds_quant);
-	if (!pipes)
-		return ;
 	pids = malloc(sizeof(pid_t) * cmds_quant);
 	if (!pids)
 	{
@@ -38,19 +55,12 @@ void	ft_execute_pipeline(t_cmd **cmds, int cmds_quant, t_mini *mini)
 		pids[i] = fork();
 		if (pids[i] == 0)
 		{
-			if (i > 0)
-				dup2(pipes[i - 1][0], STDIN_FILENO);
-			if (i < cmds_quant - 1)
-				dup2(pipes[i][1], STDOUT_FILENO);
-			close_all_pipes(pipes, cmds_quant);
+			setup_child_pipes(pipes, i, cmds_quant);
 			apply_redirects(cmds[i]);
 			ft_exec(cmds[i], new_envp);
 		}
-		i++;
 	}
-	close_all_pipes(pipes, cmds_quant);
-	wait_all_children(pids, cmds_quant);
-	free_array(new_envp);
+	cleanup_pipeline(pipes, pids, cmds_quant, new_envp);
 	g_in_command = 0;
 }
 
