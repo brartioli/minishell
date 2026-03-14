@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 14:02:53 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/14 12:50:48 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/14 16:21:39 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_env	*init_env(char **envp)
 			return (free_env_list(env_new_list), NULL);
 		}
 		add_env_back(&env_new_list, new_node);
-		free(name_value);
+		ft_free_split(name_value);
 		i++;
 	}
 	return (env_new_list);

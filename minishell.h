@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/14 13:10:35 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/14 16:53:05 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,6 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
-typedef struct s_mini
-{
-	t_env	*env_list;
-	t_token	*token_list;
-	int		exit_status;
-}	t_mini;
-
 typedef struct s_cmd
 {
 	char	**args;
@@ -62,11 +55,20 @@ typedef struct s_cmd
 	int		heredoc_fd;
 }	t_cmd;
 
+typedef struct s_mini
+{
+	t_env	*env_list;
+	t_token	*token_list;
+	t_cmd	*current_cmd;
+	int		exit_status;
+}	t_mini;
+
 // FUNCTIONS
 
 //Main
 void	ft_execute_command(t_mini *mini, t_cmd *cmd);
 int		ft_is_builtin(char *cmd);
+void	cleanup_all(t_mini *mini);
 
 // Tokenize
 void	init_token_list(t_token **token_list, char *cmd_line);
@@ -143,7 +145,7 @@ void	free_args(char **args);
 //Pipeline execution
 void	ft_execute_pipeline(t_cmd **cmds, int cmds_quant, t_mini *mini);
 void	close_all_pipes(int **pipes, int cmds_quant);
-void	wait_all_children(pid_t *pids, int cmds_quant);
+void	wait_all_children(pid_t *pids, int cmds_quant, t_mini *mini);
 void	free_pipes(int **pipes, int cmds_quant);
 
 //Pipeline parsing utils

@@ -6,7 +6,7 @@
 /*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/12 19:21:20 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/03/14 16:47:20 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int	ft_is_builtin(char *cmd)
 		return (1);
 	if (ft_str_equal(cmd, "export"))
 		return (1);
-	if (ft_str_equal(cmd, "cd"))
-		return (1);
 	return (0);
 }
 
@@ -43,6 +41,7 @@ void	ft_execute_command(t_mini *mini, t_cmd *cmd)
 		cmds = parse_input(mini->token_list, mini->env_list, mini->exit_status);
 		cmd_count = count_commands(mini->token_list);
 		ft_execute_pipeline(cmds, cmd_count, mini);
+		free_cmds_array(cmds, cmd_count);
 		return ;
 	}
 	if (!cmd || !cmd->args || !cmd->args[0])
@@ -87,6 +86,7 @@ static void	run_minishell(t_mini *mini)
 		init_token_list(&mini->token_list, cmd_line);
 		cmd = parse_command(mini->token_list, mini->env_list,
 				mini->exit_status);
+		mini->current_cmd = cmd;
 		ft_execute_command(mini, cmd);
 		free_cmd(cmd);
 		free_token_list(mini->token_list);
@@ -103,5 +103,7 @@ int	main(int argc, char **argv, char **envp)
 	mini.env_list = init_env(envp);
 	mini.exit_status = 0;
 	run_minishell(&mini);
+	free_env_list(mini.env_list);
+	rl_clear_history();
 	return (mini.exit_status);
 }

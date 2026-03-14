@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_pipeline_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 21:04:17 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/14 13:10:09 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/14 15:27:47 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,22 @@ void	close_all_pipes(int **pipes, int cmds_quant)
 	}
 }
 
-void	wait_all_children(pid_t *pids, int cmds_quant)
+void	wait_all_children(pid_t *pids, int cmds_quant, t_mini *mini)
 {
 	int	i;
+	int	status;
 
 	i = 0;
 	while (i < cmds_quant)
 	{
-		waitpid(pids[i], NULL, 0);
+		waitpid(pids[i], &status, 0);
+		if (i == cmds_quant - 1)
+		{
+			if (WIFEXITED(status))
+				mini->exit_status = WEXITSTATUS(status);
+			else if (WIFSIGNALED(status))
+				mini->exit_status = 128 + WTERMSIG(status);
+		}
 		i++;
 	}
 }

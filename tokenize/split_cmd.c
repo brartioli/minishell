@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 18:04:32 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/12 19:11:07 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/14 16:13:57 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static int	count_word(char *str)
 	count = 0;
 	in_word = 0;
 	in_quotes = 0;
+	quote_char = 0;
 	while (*str)
 	{
 		handle_quote(*str, &in_quotes, &quote_char, &in_word);
@@ -70,6 +71,7 @@ static char	*extract_word(char *str, int *i)
 
 	start = *i;
 	in_quotes = 0;
+	quote_char = 0;
 	if (str[*i] == '<' || str[*i] == '>' || str[*i] == '|')
 		return (extract_operator(str, i));
 	while (str[*i])
