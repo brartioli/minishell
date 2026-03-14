@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:43:53 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/06 20:50:08 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/14 12:40:39 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,10 @@ char	**env_list_to_array(t_env *env_list)
 	i = 0;
 	while (ptr)
 	{
-		envp[i++] = create_env_line(ptr);
+		envp[i] = create_env_line(ptr);
+		if (!envp[i])
+			return (free_array(envp), NULL);
+		i++;
 		ptr = ptr->next;
 	}
 	envp[i] = NULL;
