@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 18:58:33 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/12 18:54:43 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/17 21:11:48 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,5 @@ void	handle_sigquit(int sig)
 void	setup_signals(void)
 {
 	signal(SIGINT, handle_sigint);
+	signal(SIGQUIT, SIG_IGN);
 }

@@ -6,19 +6,19 @@
 /*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 18:48:06 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/14 15:21:39 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/03/17 21:26:42 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_exec(t_cmd *cmd, char **envp)
+void	ft_exec(t_cmd *cmd, char **envp, t_mini *mini)
 {
 	char	*path;
 
 	if (!cmd || !cmd->args || !cmd->args[0])
 		exit(1);
-	path = get_full_path(cmd->args[0], envp);
+	path = get_full_path(cmd->args[0], mini->env_list);
 	if (!path)
 	{
 		if (ft_strchr(cmd->args[0], '/'))

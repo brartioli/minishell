@@ -6,7 +6,7 @@
 /*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 12:03:31 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/14 15:48:59 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/03/17 21:29:30 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,17 @@ static void	init_execute_pipeline(t_mini *mini, char ***new_envp, int ***pipes,
 	*pipes = create_pipes(cmds_quant);
 }
 
+static void	execute_pipeline_child(t_cmd *cmd, char **new_envp, t_mini *mini)
+{
+	if (ft_is_builtin(cmd->args[0]))
+	{
+		mini->exit_status = ft_execute_builtin(mini, cmd);
+		exit(mini->exit_status);
+	}
+	else
+		ft_exec(cmd, new_envp, mini);
+}
+
 void	ft_execute_pipeline(t_cmd **cmds, int cmds_quant, t_mini *mini)
 {
 	int			**pipes;
@@ -58,10 +69,10 @@ void	ft_execute_pipeline(t_cmd **cmds, int cmds_quant, t_mini *mini)
 		{
 			setup_child_pipes(pipes, i, cmds_quant);
 			apply_redirects(cmds[i]);
-			ft_exec(cmds[i], new_envp);
+			execute_pipeline_child(cmds[i], new_envp, mini);
 		}
 	}
 	cleanup_pipeline(pipes, pids, cmds_quant, mini);
-	return (free_cmds_array(cmds, cmds_quant), free_array(new_envp));
 	g_in_command = 0;
+	return (free_cmds_array(cmds, cmds_quant), free_array(new_envp));
 }

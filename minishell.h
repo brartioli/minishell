@@ -6,7 +6,7 @@
 /*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/14 16:53:05 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/03/17 21:32:19 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,10 +129,9 @@ char	*get_cd_path(t_mini *mini, t_cmd *cmd);
 int		is_valid_number(char *str);
 
 //Path execution
-void	ft_exec(t_cmd *cmd, char **envp);
+void	ft_exec(t_cmd *cmd, char **envp, t_mini *mini);
 void	ft_execute_simple_command(t_cmd *cmd, t_mini *mini);
-char	*get_path_from_env(char **env);
-char	*get_full_path(char *cmd, char **envp);
+char	*get_full_path(char *cmd, t_env *env_list);
 void	apply_redirects(t_cmd *cmd);
 
 //Args handling

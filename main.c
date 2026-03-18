@@ -6,7 +6,7 @@
 /*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/14 16:47:20 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/03/17 21:16:18 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,10 @@ void	ft_execute_command(t_mini *mini, t_cmd *cmd)
 		cmds = parse_input(mini->token_list, mini->env_list, mini->exit_status);
 		cmd_count = count_commands(mini->token_list);
 		ft_execute_pipeline(cmds, cmd_count, mini);
-		free_cmds_array(cmds, cmd_count);
-		return ;
 	}
-	if (!cmd || !cmd->args || !cmd->args[0])
+	else if (!cmd || !cmd->args || !cmd->args[0])
 		return ;
-	if (ft_is_builtin(cmd->args[0]))
+	else if (ft_is_builtin(cmd->args[0]))
 	{
 		if (has_redirect(cmd))
 			ft_execute_simple_command(cmd, mini);
@@ -77,7 +75,8 @@ static void	run_minishell(t_mini *mini)
 		cmd_line = readline("minishell> ");
 		if (!cmd_line)
 		{
-			ft_putstr_fd("Exit\n", 1);
+			ft_putstr_fd("exit\n", 1);
+			cleanup_all(mini);
 			break ;
 		}
 		if (*cmd_line)
@@ -98,12 +97,11 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_mini	mini;
 
+	ft_memset(&mini, 0, sizeof(t_mini));
 	handle_args(argc, argv);
 	setup_signals();
 	mini.env_list = init_env(envp);
 	mini.exit_status = 0;
 	run_minishell(&mini);
-	free_env_list(mini.env_list);
-	rl_clear_history();
 	return (mini.exit_status);
 }

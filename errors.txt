@@ -1,0 +1,124 @@
+HEREDOC:
+c2r2p3% make leaks
+minishell> cat << EOF
+> oi
+> tudo bem
+> EOF
+oi
+tudo bem
+minishell> exit
+exit
+==2607789== FILE DESCRIPTORS: 4 open (3 std) at exit.
+==2607789== Open file descriptor 3:
+==2607789==    at 0x49D90FD: pipe (pipe.c:29)
+==2607789==    by 0x403C94: handle_heredoc (heredoc.c:20)
+==2607789==    by 0x404027: extract_heredoc (extracting.c:84)
+==2607789==    by 0x403A75: parse_command (parser.c:50)
+==2607789==    by 0x401619: run_minishell (main.c:86)
+==2607789==    by 0x401527: main (main.c:105)
+==2607789== 
+==2607789== 
+==2607789== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--2607789-- 
+--2607789-- used_suppression:     64 readline_indirect readline.supp:16 suppressed: 208,186 bytes in 223 blocks
+==2607789== 
+==2607789== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+c2r2p3% make leaks
+minishell> cat << EOF
+> $USER
+> EOF
+$USER
+minishell> make fclean
+minishell> 
+
+bem direto 👇
+
+🧪 testes de << (heredoc)
+✅ 1. básico
+cat << EOF
+oi
+tudo bem
+EOF
+
+👉 deve imprimir:
+
+oi
+tudo bem
+✅ 2. com variável
+cat << EOF
+$USER
+EOF
+
+👉 deve expandir variável (se você implementou expand)
+
+✅ 3. com comando
+cat << EOF | grep oi
+oi
+teste
+EOF
+
+👉 saída:
+
+oi
+✅ 4. delimitador diferente
+cat << STOP
+linha 1
+linha 2
+STOP
+❗ 5. ctrl + D no heredoc
+cat << EOF
+
+👉 aperta Ctrl + D
+
+👉 esperado:
+
+sair do heredoc sem crash
+
+não travar
+
+❗ 6. ctrl + C no heredoc
+cat << EOF
+
+👉 aperta Ctrl + C
+
+👉 esperado:
+
+cancela heredoc
+
+volta pro prompt
+
+❗ 7. histórico (o que pediram)
+
+👉 digita:
+
+cat << EOF
+oi
+EOF
+
+👉 depois:
+
+history
+
+👉 esperado:
+
+não aparecer linhas do heredoc
+
+só o comando cat << EOF
+
+🔥 checklist rápido
+
+não vaza memória (make leaks)
+
+ctrl+C funciona
+
+ctrl+D funciona
+
+não salva no history
+
+se algum desses quebrar, manda que a gente resolve rápido 💚
+
+
+Falta:
+Pipes
+Seja louco e histórico
+Variáveis de ambiente

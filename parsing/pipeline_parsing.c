@@ -6,7 +6,7 @@
 /*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 18:54:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/14 12:42:54 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/03/17 19:34:47 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_token	**split_commands_by_pipe(t_token *token_list, int cmds_quant)
 	{
 		if (ft_str_equal(token_list->type, TYPE_PIPE))
 		{
+			free(token_list->value);
 			token_list->value = NULL;
 			i++;
 			cmds[i] = token_list->next;
