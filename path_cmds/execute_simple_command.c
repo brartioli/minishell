@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_simple_command.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 19:04:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/14 13:07:07 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/17 21:27:59 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,23 @@ static void	handle_child_process(t_cmd *cmd, t_mini *mini, char **new_envp)
 	if (ft_is_builtin(cmd->args[0]))
 		exit(ft_execute_builtin(mini, cmd));
 	else
-		ft_exec(cmd, new_envp);
+		ft_exec(cmd, new_envp, mini);
 }
 
 static void	handle_parent_process(pid_t pid, t_mini *mini)
 {
-	int			exit_status;
+	int			status;
 	extern int	g_in_command;
 
-	waitpid(pid, &exit_status, 0);
-	if (WIFEXITED(exit_status))
-		mini->exit_status = WEXITSTATUS(exit_status);
-	else if (WIFSIGNALED(exit_status))
-		mini->exit_status = 128 + WTERMSIG(exit_status);
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		mini->exit_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+	{
+		mini->exit_status = 128 + WTERMSIG(status);
+		if (WTERMSIG(status) == SIGQUIT)
+			ft_putstr_fd("Quit (core dumped)\n", 2);
+	}
 	g_in_command = 0;
 }
 

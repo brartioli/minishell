@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 18:38:53 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/06 20:45:36 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/17 20:54:56 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,26 +51,21 @@ void	add_or_update_env(t_mini *mini, char *name, char *value)
 {
 	t_env	*ptr;
 	t_env	*new;
-	char	*new_value;
 
 	ptr = mini->env_list;
 	while (ptr)
 	{
 		if (ft_str_equal(ptr->name, name))
 		{
+			free(ptr->value);
 			if (value)
-			{
-				free(ptr->value);
 				ptr->value = ft_strdup(value);
-			}
+			else
+				ptr->value = NULL;
 			return ;
 		}
 		ptr = ptr->next;
 	}
-	if (value)
-		new_value = ft_strdup(value);
-	else
-		new_value = NULL;
-	new = create_env_node(ft_strdup(name), new_value);
+	new = create_env_node(name, value);
 	add_env_back(&mini->env_list, new);
 }
