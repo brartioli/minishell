@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 18:37:16 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/14 12:41:26 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/03/19 18:28:44 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,12 @@ t_cmd	*parse_command(t_token *token_list, t_env *env_list, int exit_status)
 		return (NULL);
 	expand_variables(token_list, env_list, exit_status);
 	process_quotes(token_list);
-	cmd->heredoc_fd = extract_heredoc(token_list);
+	cmd->heredoc_fd = extract_heredoc(token_list, env_list, exit_status);
+	if (cmd->heredoc_fd == -2)
+	{
+		free_cmd(cmd);
+		return (NULL);
+	}
 	cmd->infile = extract_infile(token_list);
 	cmd->outfile = extract_outfile(token_list);
 	cmd->append = has_append_flag(token_list);
@@ -76,6 +81,8 @@ void	free_cmd(t_cmd *cmd)
 
 	if (!cmd)
 		return ;
+	if (cmd->heredoc_fd != -1)
+		close(cmd->heredoc_fd);
 	if (cmd->args)
 	{
 		i = 0;
