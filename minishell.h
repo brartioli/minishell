@@ -15,6 +15,7 @@
 
 # include <fcntl.h>
 # include <signal.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <readline/readline.h>
@@ -79,8 +80,8 @@ void	free_token_list(t_token *token_list);
 char	**split_cmd(char *str);
 
 // Parsing
-t_cmd	**parse_input(t_token *token_list, t_env *env_list, int exit_status);
-t_cmd	*parse_command(t_token *token_list, t_env *env_list, int exit_status);
+t_cmd	**parse_input(t_token *token_list, t_mini *mini);
+t_cmd	*parse_command(t_token *token_list, t_mini *mini);
 void	process_quotes(t_token *token_list);
 t_cmd	*init_command(void);
 void	free_cmd(t_cmd *cmd);

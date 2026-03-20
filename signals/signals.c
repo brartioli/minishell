@@ -20,8 +20,8 @@ void	handle_sigint(int sig)
 	if (g_in_command == 2)
 	{
 		g_in_command = 130;
+		close(STDIN_FILENO);
 		write(1, "\n", 1);
-		rl_done = 1;
 		return ;
 	}
 	write(1, "\n", 1);

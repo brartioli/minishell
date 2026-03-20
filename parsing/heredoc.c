@@ -12,14 +12,6 @@
 
 #include "minishell.h"
 
-static void	print_heredoc_warning(char *delimiter)
-{
-	ft_putstr_fd("minishell: warning: here-document delimited ", 2);
-	ft_putstr_fd("by end-of-file (wanted `", 2);
-	ft_putstr_fd(delimiter, 2);
-	ft_putstr_fd("')\n", 2);
-}
-
 static void	process_heredoc_line(char *line, int pipefd, t_env *env_list,
 	int exit_status)
 {
@@ -31,7 +23,7 @@ static void	process_heredoc_line(char *line, int pipefd, t_env *env_list,
 	free(expanded);
 }
 
-static int	handle_heredoc_interrupt(char *line, int *pipefd)
+static int	handle_heredoc_interrupt(char *line, int *pipefd, int saved_fd)
 {
 	extern int	g_in_command;
 
@@ -41,11 +33,36 @@ static int	handle_heredoc_interrupt(char *line, int *pipefd)
 			free(line);
 		close(pipefd[1]);
 		close(pipefd[0]);
-		g_in_command = 0;
-		return (1);
+		dup2(saved_fd, STDIN_FILENO);
+		close(saved_fd);
+		return (-2);
 	}
 	if (!line)
 		return (0);
+	return (-1);
+}
+
+static int	check_heredoc_end(char *line, char *delim, int *pipefd)
+{
+	extern int	g_in_command;
+
+	if (!line)
+	{
+		ft_putstr_fd("minishell: warning: here-document delimited ", 2);
+		ft_putstr_fd("by end-of-file (wanted `", 2);
+		ft_putstr_fd(delim, 2);
+		ft_putstr_fd("')\n", 2);
+		close(pipefd[1]);
+		g_in_command = 0;
+		return (pipefd[0]);
+	}
+	if (ft_str_equal(line, delim))
+	{
+		free(line);
+		g_in_command = 0;
+		close(pipefd[1]);
+		return (pipefd[0]);
+	}
 	return (-1);
 }
 
@@ -53,32 +70,23 @@ int	handle_heredoc(char *delimiter, t_env *env_list, int exit_status)
 {
 	int			pipefd[2];
 	char		*line;
-	int			interrupt;
+	int			result;
 	extern int	g_in_command;
+	int			saved_stdin;
 
 	if (pipe(pipefd) == -1)
 		return (perror("pipe"), -1);
+	saved_stdin = dup(STDIN_FILENO);
 	g_in_command = 2;
 	while (1)
 	{
 		line = readline("> ");
-		interrupt = handle_heredoc_interrupt(line, pipefd);
-		if (interrupt == 1)
-			return (-1);
-		if (interrupt == 0)
-		{
-			print_heredoc_warning(delimiter);
-			close(pipefd[1]);
-			g_in_command = 0;
-			return (pipefd[0]);
-		}
-		if (ft_str_equal(line, delimiter))
-		{
-			free(line);
-			g_in_command = 0;
-			close(pipefd[1]);
-			return (pipefd[0]);
-		}
+		result = handle_heredoc_interrupt(line, pipefd, saved_stdin);
+		if (result == -2)
+			return (-2);
+		result = check_heredoc_end(line, delimiter, pipefd);
+		if (result >= 0)
+			return (close(saved_stdin), result);
 		process_heredoc_line(line, pipefd[1], env_list, exit_status);
 		free(line);
 	}
