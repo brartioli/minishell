@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/17 21:32:19 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/03/19 17:49:19 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ void	handle_sigquit(int sig);
 void	handle_sigint(int sig);
 
 //Heredoc
-int		handle_heredoc(char *delimiter);
-int		extract_heredoc(t_token *token_list);
+int		handle_heredoc(char *delimiter, t_env *env_list, int exit_status);
+int		extract_heredoc(t_token *token_list, t_env *env_list, int exit_status);
 
 #endif

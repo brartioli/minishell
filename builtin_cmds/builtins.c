@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 19:26:51 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/12 19:53:41 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/19 17:54:53 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,23 @@ int	ft_execute_builtin(t_mini *mini, t_cmd *cmd)
 		return (ft_execute_cd(mini, cmd));
 	else
 		return (1);
+}
+
+int	ft_is_builtin(char *cmd)
+{
+	if (ft_str_equal(cmd, "echo"))
+		return (1);
+	if (ft_str_equal(cmd, "pwd"))
+		return (1);
+	if (ft_str_equal(cmd, "cd"))
+		return (1);
+	if (ft_str_equal(cmd, "unset"))
+		return (1);
+	if (ft_str_equal(cmd, "env"))
+		return (1);
+	if (ft_str_equal(cmd, "exit"))
+		return (1);
+	if (ft_str_equal(cmd, "export"))
+		return (1);
+	return (0);
 }

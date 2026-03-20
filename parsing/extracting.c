@@ -6,7 +6,7 @@
 /*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 20:31:57 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/12 19:36:03 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/19 18:28:30 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,13 @@ int	has_append_flag(t_token *token_list)
 	return (0);
 }
 
-int	extract_heredoc(t_token *token_list)
+static void	print_heredoc_error(void)
+{
+	ft_putstr_fd("minishell: syntax error near unexpected token ", 2);
+	ft_putstr_fd("`newline'\n", 2);
+}
+
+int	extract_heredoc(t_token *token_list, t_env *env_list, int exit_status)
 {
 	t_token	*ptr;
 	char	*delimiter;
@@ -76,14 +82,18 @@ int	extract_heredoc(t_token *token_list)
 	ptr = token_list;
 	while (ptr)
 	{
+		if (ft_str_equal(ptr->type, TYPE_PIPE))
+			break ;
 		if (ft_str_equal(ptr->type, TYPE_HEREDOC))
 		{
 			if (ptr->next && ptr->next->value)
 			{
 				delimiter = ptr->next->value;
-				fd = handle_heredoc(delimiter);
+				fd = handle_heredoc(delimiter, env_list, exit_status);
 				return (fd);
 			}
+			print_heredoc_error();
+			return (-2);
 		}
 		ptr = ptr->next;
 	}

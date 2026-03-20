@@ -3,33 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/17 21:16:18 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/03/19 17:55:27 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	ft_is_builtin(char *cmd)
-{
-	if (ft_str_equal(cmd, "echo"))
-		return (1);
-	if (ft_str_equal(cmd, "pwd"))
-		return (1);
-	if (ft_str_equal(cmd, "cd"))
-		return (1);
-	if (ft_str_equal(cmd, "unset"))
-		return (1);
-	if (ft_str_equal(cmd, "env"))
-		return (1);
-	if (ft_str_equal(cmd, "exit"))
-		return (1);
-	if (ft_str_equal(cmd, "export"))
-		return (1);
-	return (0);
-}
 
 void	ft_execute_command(t_mini *mini, t_cmd *cmd)
 {
@@ -65,10 +46,26 @@ static void	handle_args(int ac, char **av)
 	}
 }
 
+static void	process_command_line(t_mini *mini, char *cmd_line)
+{
+	t_cmd	*cmd;
+
+	mini->token_list = NULL;
+	init_token_list(&mini->token_list, cmd_line);
+	cmd = NULL;
+	if (!has_pipes(mini->token_list))
+		cmd = parse_command(mini->token_list, mini->env_list,
+				mini->exit_status);
+	mini->current_cmd = cmd;
+	ft_execute_command(mini, cmd);
+	if (cmd)
+		free_cmd(cmd);
+	free_token_list(mini->token_list);
+}
+
 static void	run_minishell(t_mini *mini)
 {
 	char	*cmd_line;
-	t_cmd	*cmd;
 
 	while (1)
 	{
@@ -81,14 +78,7 @@ static void	run_minishell(t_mini *mini)
 		}
 		if (*cmd_line)
 			add_history(cmd_line);
-		mini->token_list = NULL;
-		init_token_list(&mini->token_list, cmd_line);
-		cmd = parse_command(mini->token_list, mini->env_list,
-				mini->exit_status);
-		mini->current_cmd = cmd;
-		ft_execute_command(mini, cmd);
-		free_cmd(cmd);
-		free_token_list(mini->token_list);
+		process_command_line(mini, cmd_line);
 		free(cmd_line);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 18:58:33 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/17 21:11:48 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/03/19 21:23:25 by malcosta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,15 @@ int	g_in_command = 0;
 void	handle_sigint(int sig)
 {
 	(void)sig;
+	if (g_in_command == 2)
+	{
+		g_in_command = 130;
+		write(1, "\n", 1);
+		rl_done = 1;
+		return ;
+	}
 	write(1, "\n", 1);
-	if (!g_in_command)
+	if (g_in_command == 0)
 	{
 		rl_on_new_line();
 		rl_replace_line("", 0);
