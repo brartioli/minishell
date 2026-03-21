@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-t_cmd	**parse_input(t_token *token_list, t_env *env_list, int exit_status)
+t_cmd	**parse_input(t_token *token_list, t_mini *mini)
 {
 	t_cmd	**cmds;
 	t_token	**token_groups;
@@ -23,14 +23,17 @@ t_cmd	**parse_input(t_token *token_list, t_env *env_list, int exit_status)
 	token_groups = split_commands_by_pipe(token_list, cmd_count);
 	cmds = malloc(sizeof(t_cmd *) * (cmd_count + 1));
 	if (!cmds)
-	{
-		free(token_groups);
-		return (NULL);
-	}
+		return (free(token_groups), NULL);
 	i = 0;
 	while (i < cmd_count)
 	{
-		cmds[i] = parse_command(token_groups[i], env_list, exit_status);
+		cmds[i] = parse_command(token_groups[i], mini);
+		if (!cmds[i])
+		{
+			free_cmds_array(cmds, i);
+			free(token_groups);
+			return (NULL);
+		}
 		i++;
 	}
 	cmds[i] = NULL;
@@ -38,18 +41,23 @@ t_cmd	**parse_input(t_token *token_list, t_env *env_list, int exit_status)
 	return (cmds);
 }
 
-t_cmd	*parse_command(t_token *token_list, t_env *env_list, int exit_status)
+t_cmd	*parse_command(t_token *token_list, t_mini *mini)
 {
-	t_cmd	*cmd;
+	t_cmd		*cmd;
+	extern int	g_in_command;
 
 	cmd = init_command();
 	if (!cmd)
 		return (NULL);
-	expand_variables(token_list, env_list, exit_status);
+	expand_variables(token_list, mini->env_list, mini->exit_status);
 	process_quotes(token_list);
-	cmd->heredoc_fd = extract_heredoc(token_list, env_list, exit_status);
+	cmd->heredoc_fd = extract_heredoc(token_list, mini->env_list,
+			mini->exit_status);
 	if (cmd->heredoc_fd == -2)
 	{
+		if (g_in_command == 130)
+			mini->exit_status = 130;
+		g_in_command = 0;
 		free_cmd(cmd);
 		return (NULL);
 	}

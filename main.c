@@ -19,7 +19,9 @@ void	ft_execute_command(t_mini *mini, t_cmd *cmd)
 
 	if (has_pipes(mini->token_list))
 	{
-		cmds = parse_input(mini->token_list, mini->env_list, mini->exit_status);
+		cmds = parse_input(mini->token_list, mini);
+		if (!cmds)
+			return ;
 		cmd_count = count_commands(mini->token_list);
 		ft_execute_pipeline(cmds, cmd_count, mini);
 	}
@@ -54,8 +56,7 @@ static void	process_command_line(t_mini *mini, char *cmd_line)
 	init_token_list(&mini->token_list, cmd_line);
 	cmd = NULL;
 	if (!has_pipes(mini->token_list))
-		cmd = parse_command(mini->token_list, mini->env_list,
-				mini->exit_status);
+		cmd = parse_command(mini->token_list, mini);
 	mini->current_cmd = cmd;
 	ft_execute_command(mini, cmd);
 	if (cmd)

@@ -14,6 +14,8 @@
 
 static void	setup_child_pipes(int **pipes, int i, int cmds_quant)
 {
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	if (i > 0)
 		dup2(pipes[i - 1][0], STDIN_FILENO);
 	if (i < cmds_quant - 1)
