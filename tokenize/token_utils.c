@@ -6,7 +6,7 @@
 /*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 14:18:34 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/14 16:03:35 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/03/21 13:34:49 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,16 @@ void	free_token_list(t_token *token_list)
 		free(tmp->value);
 		free(tmp);
 	}
+}
+
+void	count_operator(char **str, int *count, int *in_word)
+{
+	if (*in_word)
+		(*count)++;
+	*in_word = 0;
+	(*count)++;
+	if ((**str == '<' && *(*str + 1) == '<')
+		|| (**str == '>' && *(*str + 1) == '>')
+		|| (**str == '|' && *(*str + 1) == '|'))
+		(*str)++;
 }

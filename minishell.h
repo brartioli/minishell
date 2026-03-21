@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:18:52 by bfernan2          #+#    #+#             */
-/*   Updated: 2026/03/19 17:49:19 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/21 13:38:06 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_mini
 void	ft_execute_command(t_mini *mini, t_cmd *cmd);
 int		ft_is_builtin(char *cmd);
 void	cleanup_all(t_mini *mini);
+int		check_pipe_syntax(char *cmd_line);
 
 // Tokenize
 void	init_token_list(t_token **token_list, char *cmd_line);
@@ -78,6 +79,8 @@ void	add_token_back(t_token **token_list, t_token *new_token);
 void	print_token_list(t_token *token_list);
 void	free_token_list(t_token *token_list);
 char	**split_cmd(char *str);
+void	count_operator(char **str, int *count, int *in_word);
+int		count_word(char *str);
 
 // Parsing
 t_cmd	**parse_input(t_token *token_list, t_mini *mini);

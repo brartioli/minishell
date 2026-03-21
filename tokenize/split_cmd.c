@@ -6,7 +6,7 @@
 /*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 18:04:32 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/14 16:13:57 by bfernan2         ###   ########.fr       */
+/*   Updated: 2026/03/21 13:35:09 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,31 +24,6 @@ static void	handle_quote(char c, int *in_quotes, char *quote_char, int *in_word)
 		*in_quotes = 0;
 }
 
-static int	count_word(char *str)
-{
-	int		count;
-	int		in_word;
-	int		in_quotes;
-	char	quote_char;
-
-	count = 0;
-	in_word = 0;
-	in_quotes = 0;
-	quote_char = 0;
-	while (*str)
-	{
-		handle_quote(*str, &in_quotes, &quote_char, &in_word);
-		if (*str == ' ' && !in_quotes && in_word && ++count)
-			in_word = 0;
-		else if (*str != ' ' || in_quotes)
-			in_word = 1;
-		str++;
-	}
-	if (in_word)
-		count++;
-	return (count);
-}
-
 static char	*extract_operator(char *str, int *i)
 {
 	int	start;
@@ -57,6 +32,8 @@ static char	*extract_operator(char *str, int *i)
 	if (str[*i] == '<' && str[*i + 1] == '<')
 		*i += 2;
 	else if (str[*i] == '>' && str[*i + 1] == '>')
+		*i += 2;
+	else if (str[*i] == '|' && str[*i + 1] == '|')
 		*i += 2;
 	else
 		(*i)++;
@@ -89,6 +66,33 @@ static char	*extract_word(char *str, int *i)
 		(*i)++;
 	}
 	return (ft_substr(str, start, *i - start));
+}
+
+int	count_word(char *str)
+{
+	int		count;
+	int		in_word;
+	int		in_quotes;
+	char	quote_char;
+
+	count = 0;
+	in_word = 0;
+	in_quotes = 0;
+	quote_char = 0;
+	while (*str)
+	{
+		handle_quote(*str, &in_quotes, &quote_char, &in_word);
+		if (!in_quotes && (*str == '|' || *str == '<' || *str == '>'))
+			count_operator(&str, &count, &in_word);
+		else if (*str == ' ' && !in_quotes && in_word && ++count)
+			in_word = 0;
+		else if (*str != ' ' || in_quotes)
+			in_word = 1;
+		str++;
+	}
+	if (in_word)
+		count++;
+	return (count);
 }
 
 char	**split_cmd(char *str)

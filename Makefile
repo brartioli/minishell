@@ -6,7 +6,7 @@
 #    By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 18:14:51 by bfernan2          #+#    #+#              #
-#    Updated: 2026/03/17 20:32:30 by bfernan2         ###   ########.fr        #
+#    Updated: 2026/03/21 13:39:55 by bfernan2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ VALGRIND = valgrind -s -q \
 			--child-silent-after-fork=yes \
 			--suppressions=readline.supp
 
-SRC = main.c clean.c \
+SRC = main.c clean.c syntax.c\
 tokenize/token_utils.c tokenize/tokenize.c tokenize/split_cmd.c \
 env/env.c env/env_utils.c \
 path_cmds/exec.c \
