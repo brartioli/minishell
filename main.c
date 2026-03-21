@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malcosta <malcosta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfernan2 <bfernan2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:30:41 by malcosta          #+#    #+#             */
-/*   Updated: 2026/03/19 17:55:27 by malcosta         ###   ########.fr       */
+/*   Updated: 2026/03/21 13:39:06 by bfernan2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static void	process_command_line(t_mini *mini, char *cmd_line)
 {
 	t_cmd	*cmd;
 
+	if (check_pipe_syntax(cmd_line))
+		return ;
 	mini->token_list = NULL;
 	init_token_list(&mini->token_list, cmd_line);
 	cmd = NULL;
@@ -61,7 +63,9 @@ static void	process_command_line(t_mini *mini, char *cmd_line)
 	ft_execute_command(mini, cmd);
 	if (cmd)
 		free_cmd(cmd);
+	mini->current_cmd = NULL;
 	free_token_list(mini->token_list);
+	mini->token_list = NULL;
 }
 
 static void	run_minishell(t_mini *mini)
